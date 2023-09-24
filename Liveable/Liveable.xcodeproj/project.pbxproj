@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		7D1C0B482AC09A52000F134C /* LiveableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B472AC09A52000F134C /* LiveableApp.swift */; };
-		7D1C0B4A2AC09A52000F134C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B492AC09A52000F134C /* ContentView.swift */; };
 		7D1C0B4C2AC09A53000F134C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1C0B4B2AC09A53000F134C /* Assets.xcassets */; };
 		7D1C0B4F2AC09A53000F134C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1C0B4E2AC09A53000F134C /* Preview Assets.xcassets */; };
 		7D1C0B592AC09A53000F134C /* LiveableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B582AC09A53000F134C /* LiveableTests.swift */; };
 		7D1C0B632AC09A53000F134C /* LiveableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B622AC09A53000F134C /* LiveableUITests.swift */; };
 		7D1C0B652AC09A53000F134C /* LiveableUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B642AC09A53000F134C /* LiveableUITestsLaunchTests.swift */; };
+		7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B712AC09D00000F134C /* TabbarRoot.swift */; };
+		7D1C0B742AC09D99000F134C /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B732AC09D99000F134C /* ExploreView.swift */; };
+		7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B752AC09DBD000F134C /* FavoritesView.swift */; };
+		7D1C0B782AC09DEA000F134C /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B772AC09DEA000F134C /* TripsView.swift */; };
+		7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B792AC09E2D000F134C /* InboxView.swift */; };
+		7D1C0B7C2AC09E38000F134C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7B2AC09E38000F134C /* ProfileView.swift */; };
+		7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,6 @@
 /* Begin PBXFileReference section */
 		7D1C0B442AC09A52000F134C /* Liveable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Liveable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D1C0B472AC09A52000F134C /* LiveableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveableApp.swift; sourceTree = "<group>"; };
-		7D1C0B492AC09A52000F134C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D1C0B4B2AC09A53000F134C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D1C0B4E2AC09A53000F134C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D1C0B542AC09A53000F134C /* LiveableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +49,13 @@
 		7D1C0B5E2AC09A53000F134C /* LiveableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D1C0B622AC09A53000F134C /* LiveableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveableUITests.swift; sourceTree = "<group>"; };
 		7D1C0B642AC09A53000F134C /* LiveableUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveableUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7D1C0B712AC09D00000F134C /* TabbarRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarRoot.swift; sourceTree = "<group>"; };
+		7D1C0B732AC09D99000F134C /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		7D1C0B752AC09DBD000F134C /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		7D1C0B772AC09DEA000F134C /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
+		7D1C0B792AC09E2D000F134C /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		7D1C0B7B2AC09E38000F134C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +106,9 @@
 		7D1C0B462AC09A52000F134C /* Liveable */ = {
 			isa = PBXGroup;
 			children = (
+				7D1C0B7E2AC09F04000F134C /* Companents */,
+				7D1C0B7D2AC09E48000F134C /* Modules */,
 				7D1C0B472AC09A52000F134C /* LiveableApp.swift */,
-				7D1C0B492AC09A52000F134C /* ContentView.swift */,
 				7D1C0B4B2AC09A53000F134C /* Assets.xcassets */,
 				7D1C0B4D2AC09A53000F134C /* Preview Content */,
 			);
@@ -125,6 +138,27 @@
 				7D1C0B642AC09A53000F134C /* LiveableUITestsLaunchTests.swift */,
 			);
 			path = LiveableUITests;
+			sourceTree = "<group>";
+		};
+		7D1C0B7D2AC09E48000F134C /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7D1C0B712AC09D00000F134C /* TabbarRoot.swift */,
+				7D1C0B732AC09D99000F134C /* ExploreView.swift */,
+				7D1C0B752AC09DBD000F134C /* FavoritesView.swift */,
+				7D1C0B772AC09DEA000F134C /* TripsView.swift */,
+				7D1C0B792AC09E2D000F134C /* InboxView.swift */,
+				7D1C0B7B2AC09E38000F134C /* ProfileView.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7D1C0B7E2AC09F04000F134C /* Companents */ = {
+			isa = PBXGroup;
+			children = (
+				7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */,
+			);
+			path = Companents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +291,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D1C0B4A2AC09A52000F134C /* ContentView.swift in Sources */,
+				7D1C0B782AC09DEA000F134C /* TripsView.swift in Sources */,
+				7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */,
 				7D1C0B482AC09A52000F134C /* LiveableApp.swift in Sources */,
+				7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */,
+				7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */,
+				7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */,
+				7D1C0B7C2AC09E38000F134C /* ProfileView.swift in Sources */,
+				7D1C0B742AC09D99000F134C /* ExploreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
