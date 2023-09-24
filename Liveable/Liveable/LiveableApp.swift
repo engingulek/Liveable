@@ -11,7 +11,7 @@ import SwiftUI
 struct LiveableApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabbarRoot()
         }
     }
 }
