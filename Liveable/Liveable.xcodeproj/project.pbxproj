@@ -21,6 +21,8 @@
 		7D1C0B7C2AC09E38000F134C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7B2AC09E38000F134C /* ProfileView.swift */; };
 		7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */; };
 		7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0278B2AC1B75500640F61 /* LoginView.swift */; };
+		7DD0278E2AC1CE9500640F61 /* AdvertDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */; };
+		7DD027912AC1CF3400640F61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7DD027902AC1CF3400640F61 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		7D1C0B7B2AC09E38000F134C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarButton.swift; sourceTree = "<group>"; };
 		7DD0278B2AC1B75500640F61 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertDesign.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD027912AC1CF3400640F61 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */,
+				7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */,
 			);
 			path = Companents;
 			sourceTree = "<group>";
@@ -180,6 +185,9 @@
 			dependencies = (
 			);
 			name = Liveable;
+			packageProductDependencies = (
+				7DD027902AC1CF3400640F61 /* Kingfisher */,
+			);
 			productName = Liveable;
 			productReference = 7D1C0B442AC09A52000F134C /* Liveable.app */;
 			productType = "com.apple.product-type.application";
@@ -252,6 +260,9 @@
 				Base,
 			);
 			mainGroup = 7D1C0B3B2AC09A52000F134C;
+			packageReferences = (
+				7DD0278F2AC1CF3400640F61 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 7D1C0B452AC09A52000F134C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,6 +308,7 @@
 				7D1C0B782AC09DEA000F134C /* TripsView.swift in Sources */,
 				7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */,
 				7D1C0B482AC09A52000F134C /* LiveableApp.swift in Sources */,
+				7DD0278E2AC1CE9500640F61 /* AdvertDesign.swift in Sources */,
 				7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */,
 				7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */,
 				7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */,
@@ -627,6 +639,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7DD0278F2AC1CF3400640F61 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7DD027902AC1CF3400640F61 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DD0278F2AC1CF3400640F61 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D1C0B3C2AC09A52000F134C /* Project object */;
 }
