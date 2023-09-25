@@ -20,6 +20,7 @@
 		7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B792AC09E2D000F134C /* InboxView.swift */; };
 		7D1C0B7C2AC09E38000F134C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7B2AC09E38000F134C /* ProfileView.swift */; };
 		7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */; };
+		7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0278B2AC1B75500640F61 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		7D1C0B792AC09E2D000F134C /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
 		7D1C0B7B2AC09E38000F134C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarButton.swift; sourceTree = "<group>"; };
+		7DD0278B2AC1B75500640F61 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				7D1C0B772AC09DEA000F134C /* TripsView.swift */,
 				7D1C0B792AC09E2D000F134C /* InboxView.swift */,
 				7D1C0B7B2AC09E38000F134C /* ProfileView.swift */,
+				7DD0278B2AC1B75500640F61 /* LoginView.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				7D1C0B782AC09DEA000F134C /* TripsView.swift in Sources */,
 				7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */,
 				7D1C0B482AC09A52000F134C /* LiveableApp.swift in Sources */,
+				7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */,
 				7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */,
 				7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */,
 				7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */,
