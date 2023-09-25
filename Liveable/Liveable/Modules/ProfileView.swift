@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var toLoginView: Bool = false
     var body: some View {
-        Text("Profile Page")
+            VStack {
+                HStack {
+                    VStack(alignment: .leading,spacing: 5) {
+                        Text("Your Profile")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        Text("Sign in to plan your trip")
+                            .font(.title3)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                }.padding()
+                
+                Button {
+                    toLoginView = true
+                } label: {
+                    Text("Button")
+                        .foregroundColor(.white)
+                        .padding()
+                        .font(.title3)
+                        .frame(width: UIScreen.main.bounds.width / 1.5)
+                        .background(Color.pink )
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                
+            }.fullScreenCover(isPresented: $toLoginView) {
+                LoginView()
+            }
     }
 }
 
