@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @State private var categoryTab : String = "Populer"
     var body: some View {
         VStack {
             VStack {
                 search
                 categories
             }.background(
-                Color.white // any non-transparent background
+                Color.white 
                     .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
-                    .mask(Rectangle().padding(.bottom, -4)) /// here!
+                    .mask(Rectangle().padding(.bottom, -4))
             )
             listAdvert
            
@@ -55,13 +56,8 @@ extension ExploreView {
     private var categories : some View {
         ScrollView(.horizontal,showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(0..<10) { _ in
-                    VStack {
-                        Image(systemName: "flame")
-                        Text("popular")
-                            .fontWeight(.light)
-                    }.font(.title3)
-                }
+              CategoryTitle(categoryTab: $categoryTab, title: "Populer", icon: "flame")
+                CategoryTitle(categoryTab: $categoryTab, title: "Shacks", icon: "shack")
             }
            
         }.padding()
