@@ -8,10 +8,11 @@
 import SwiftUI
 import Kingfisher
 struct AdvertDesign: View {
+    let advert  : Advert
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
             ZStack(alignment:.topTrailing) {
-                KFImage(URL(string: "https://a0.muscache.com/im/pictures/miso/Hosting-664438232928897086/original/f5a2dd5b-588f-4abc-add3-1924f1360565.jpeg?im_w=1200"))
+                KFImage(URL(string: advert.baseImageURL))
                     .resizable()
                     .frame(height: UIScreen.main.bounds.height / 4)
                     .cornerRadius(20)
@@ -23,23 +24,22 @@ struct AdvertDesign: View {
            
                
             HStack {
-                Text("Tree Home - Rize,Turkey")
-                   
+                Text("\(advert.title)- \(advert.location.city),\(advert.location.country)")
                     .fontWeight(.semibold)
                 Spacer()
                 HStack(spacing:2){
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
-                    Text("4,5(200)")
+                    Text("\(String(format: "%.1f", advert.rating))")
                 }
             }
             
-            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.... ")
+            Text(advert.decription)
                 .font(.footnote)
                 .foregroundColor(.gray)
             HStack(spacing:2) {
                 Spacer()
-                Text("$ 200")
+                Text("\(advert.price)")
                     .font(.title2)
                     .fontWeight(.semibold)
                 Text(" night")
@@ -50,8 +50,10 @@ struct AdvertDesign: View {
     }
 }
 
-struct AdvertDesign_Previews: PreviewProvider {
+
+// Example eklenecek
+/*struct AdvertDesign_Previews: PreviewProvider {
     static var previews: some View {
         AdvertDesign()
     }
-}
+}*/
