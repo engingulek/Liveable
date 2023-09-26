@@ -9,20 +9,28 @@ import SwiftUI
 
 struct ExploreView: View {
     @State private var categoryTab : String = "Populer"
+    @StateObject var exploreViewModel = ExploreViewModel()
     var body: some View {
         VStack {
-            VStack {
-                search
-                categories
-            }.background(
-                Color.white 
-                    .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
-                    .mask(Rectangle().padding(.bottom, -4))
-            )
-            listAdvert
            
+                VStack {
+                    search
+                    categories
+                }.background(
+                    Color.white
+                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                        .mask(Rectangle().padding(.bottom, -4))
+                )
+            if exploreViewModel.isPageLoaded {
+                listAdvert
+            }else{
+                VStack(alignment:.center) {
+                    ProgressView()
+                        .font(.title)
+                        .padding(.vertical,250)
+                }
+            }
             Spacer()
-          
         }
     }
 }
@@ -68,8 +76,8 @@ extension ExploreView {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing:35){
-                    ForEach(0..<10) { _ in
-                        AdvertDesign()
+                    ForEach(exploreViewModel.advertList,id:\.id) { advert in
+                       AdvertDesign(advert: advert)
                     }
                 }
             }

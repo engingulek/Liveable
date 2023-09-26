@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Advert
-struct Advert: Codable {
+struct Advert: Decodable {
     let baseImageURL: String
     let category, decription: String
     let id: Int
