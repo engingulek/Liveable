@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct ExploreView: View {
-    @State private var categoryTab : String = "Populer"
-    @StateObject var exploreViewModel = ExploreViewModel()
+    @StateObject private  var exploreViewModel = ExploreViewModel()
     var body: some View {
         VStack {
-           
-                VStack {
+            VStack {
                     search
                     categories
                 }.background(
@@ -22,13 +20,20 @@ struct ExploreView: View {
                         .mask(Rectangle().padding(.bottom, -4))
                 )
             if exploreViewModel.isPageLoaded {
-                listAdvert
-            }else{
-                VStack(alignment:.center) {
-                    ProgressView()
-                        .font(.title)
-                        .padding(.vertical,250)
+                if exploreViewModel.isError {
+                    VStack(alignment:.center) {
+                        Image(exploreViewModel.errorMessage.icon)
+                            .resizable()
+                            .frame(width: 100,height: 100)
+                        Text(exploreViewModel.errorMessage.message)
+                            .font(.title2)
+                    }.padding(.top,100)
+                }else{
+                    listAdvert
                 }
+            }else{
+              ProgressView()
+              
             }
             Spacer()
         }
@@ -63,9 +68,14 @@ extension ExploreView {
     
     private var categories : some View {
         ScrollView(.horizontal,showsIndicators: false) {
-            HStack(spacing: 10) {
-              CategoryTitle(categoryTab: $categoryTab, title: "Populer", icon: "flame")
-                CategoryTitle(categoryTab: $categoryTab, title: "Shacks", icon: "shack")
+            HStack(spacing: 20) {
+                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 0, title: "Populer", icon: "flame")
+                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 1, title: "Shacks", icon: "shack")
+                
+                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 2, title: "Beachfront", icon: "beachfront")
+                
+                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 3, title: "Boats", icon: "boat")
+                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 4, title: "Treehouses", icon: "treehouse")
             }
            
         }.padding()

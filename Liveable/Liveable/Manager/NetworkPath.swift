@@ -15,10 +15,6 @@ enum NetworkPath {
 }
 
 extension NetworkPath : TargetType {
-   
-    
-    
-    
     var path: String {
         switch self {
         case .adverts:

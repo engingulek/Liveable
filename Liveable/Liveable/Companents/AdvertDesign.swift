@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
-import Kingfisher
 struct AdvertDesign: View {
     let advert  : Advert
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
             ZStack(alignment:.topTrailing) {
-                KFImage(URL(string: advert.baseImageURL))
-                    .resizable()
-                    .frame(height: UIScreen.main.bounds.height / 4)
-                    .cornerRadius(20)
+                AsyncImage(url: URL(string: advert.baseImageURL)) { image in
+                    image.image?.resizable()
+                        .frame(height: UIScreen.main.bounds.height / 4)
+                        .cornerRadius(20)
+                }
+                
                 Image(systemName: "heart")
                     .font(.title2)
                     .foregroundColor(.white)

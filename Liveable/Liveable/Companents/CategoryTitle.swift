@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CategoryTitle: View {
-    @Binding var categoryTab : String
-    private var isSelected : Bool { categoryTab == title}
+    @Binding var categoryTab : Int
+    private var isSelected : Bool { categoryTab == id}
+    let id : Int
     let title : String
     let icon : String
     var body: some View {
@@ -39,7 +40,7 @@ extension CategoryTitle {
     
     private func buttonAction() {
         withAnimation {
-            categoryTab = title
+            categoryTab = id
         }
     }
 }
@@ -47,8 +48,8 @@ extension CategoryTitle {
 struct CategoryTitle_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            CategoryTitle(categoryTab: .constant("Populer"), title: "Populer", icon: "flame")
-            CategoryTitle(categoryTab: .constant("Shack"), title: "Shacks", icon: "shack")
+            CategoryTitle(categoryTab: .constant(0), id: 0, title: "Populer", icon: "flame")
+           
         }
        
     }
