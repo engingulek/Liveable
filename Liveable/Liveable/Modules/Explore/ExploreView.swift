@@ -10,32 +10,34 @@ import SwiftUI
 struct ExploreView: View {
     @StateObject private  var exploreViewModel = ExploreViewModel()
     var body: some View {
-        VStack {
+        NavigationView {
             VStack {
-                    search
-                    categories
-                }.background(
-                    Color.white
-                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
-                        .mask(Rectangle().padding(.bottom, -4))
-                )
-            if exploreViewModel.isPageLoaded {
-                if exploreViewModel.isError {
-                    VStack(alignment:.center) {
-                        Image(exploreViewModel.errorMessage.icon)
-                            .resizable()
-                            .frame(width: 100,height: 100)
-                        Text(exploreViewModel.errorMessage.message)
-                            .font(.title2)
-                    }.padding(.top,100)
+                VStack {
+                        search
+                        categories
+                    }.background(
+                        Color.white
+                            .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                            .mask(Rectangle().padding(.bottom, -4))
+                    )
+                if exploreViewModel.isPageLoaded {
+                    if exploreViewModel.isError {
+                        VStack(alignment:.center) {
+                            Image(exploreViewModel.errorMessage.icon)
+                                .resizable()
+                                .frame(width: 100,height: 100)
+                            Text(exploreViewModel.errorMessage.message)
+                                .font(.title2)
+                        }.padding(.top,100)
+                    }else{
+                        listAdvert
+                    }
                 }else{
-                    listAdvert
+                  ProgressView()
+                  
                 }
-            }else{
-              ProgressView()
-              
+                Spacer()
             }
-            Spacer()
         }
     }
 }
@@ -87,7 +89,16 @@ extension ExploreView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing:35){
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
-                       AdvertDesign(advert: advert)
+                        NavigationLink {
+                            AdvertDetailView(advert: advert)
+                                .edgesIgnoringSafeArea(.top)
+                              
+                        } label: {
+                            AdvertDesign(advert: advert)
+                                .foregroundColor(.primary)
+                        }
+
+                      
                     }
                 }
             }
