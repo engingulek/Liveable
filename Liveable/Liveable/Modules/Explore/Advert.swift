@@ -25,6 +25,8 @@ struct Advert: Decodable {
         case category, decription, id, images, location, price, rating, roomCount, title
         case userID = "userId"
     }
+    
+  
 }
 
 // MARK: - Location
