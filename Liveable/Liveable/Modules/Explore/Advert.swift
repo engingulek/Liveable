@@ -26,7 +26,7 @@ struct Advert: Decodable {
         case userID = "userId"
     }
     
-  
+    static let advertExample = Advert(baseImageURL: "https://a0.muscache.com/im/pictures/miso/Hosting-926080375184805181/original/61878729-c683-4983-bde9-d1922d9a75bf.jpeg?im_w=1200", category: "shacks", decription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ", id: 0, images: ["https://a0.muscache.com/im/pictures/miso/Hosting-926080375184805181/original/61878729-c683-4983-bde9-d1922d9a75bf.jpeg?im_w=1200","https://a0.muscache.com/im/pictures/miso/Hosting-926080375184805181/original/61878729-c683-4983-bde9-d1922d9a75bf.jpeg?im_w=1200"], location: Location(city: "İstanbul", country: "Türkey", latitude: "12.000", longitude: "12.000"), price: 300, rating: 2.5, roomCount: RoomCount(bath: 1, bed: 1, bedroom: 1, guest: 1), title: "Title House", userID: 0)
 }
 
 // MARK: - Location

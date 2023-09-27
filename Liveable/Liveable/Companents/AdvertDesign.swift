@@ -52,9 +52,9 @@ struct AdvertDesign: View {
 }
 
 
-// Example eklenecek
-/*struct AdvertDesign_Previews: PreviewProvider {
+
+struct AdvertDesign_Previews: PreviewProvider {
     static var previews: some View {
-        AdvertDesign()
+        AdvertDesign(advert: Advert.advertExample)
     }
-}*/
+}
