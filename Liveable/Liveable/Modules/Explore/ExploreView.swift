@@ -9,11 +9,20 @@ import SwiftUI
 
 struct ExploreView: View {
     @StateObject private  var exploreViewModel = ExploreViewModel()
+
     var body: some View {
         NavigationView {
             VStack {
                 VStack {
+                    NavigationLink {
+                        SearchView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
                         search
+                            .foregroundColor(.primary)
+                    }
+
+                    
                         categories
                     }.background(
                         Color.white
@@ -45,28 +54,27 @@ struct ExploreView: View {
 
 extension ExploreView {
     private var search: some View {
-        HStack(spacing:20) {
-                Image(systemName: "magnifyingglass")
-                    .font(.title2)
-                VStack(alignment:.leading){
-                    Text("To where?")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                    Text("Perfect nature, clean air, zero sea")
-                        .foregroundColor(.gray)
-                        .fontWeight(.semibold)
-                        .font(.callout)
-                }
-                Image(systemName: "slider.horizontal.3")
-                    .font(.title2)
-            }.padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(lineWidth: 1)
-                    .foregroundColor(.white)
-                    .shadow(color: .black, radius: 2, x: 2, y: 2)
-                    )
-    }
+           HStack(spacing:20) {
+                   Image(systemName: "magnifyingglass")
+                       .font(.title2)
+                   VStack(alignment:.leading){
+                       Text("To where?")
+                           .font(.title3)
+                           .fontWeight(.semibold)
+                       Text("Perfect nature, clean air, zero sea")
+                           .foregroundColor(.gray)
+                           .fontWeight(.semibold)
+                           .font(.callout)
+                   }
+                   
+               }.padding()
+               .overlay(
+                   RoundedRectangle(cornerRadius: 25)
+                       .stroke(lineWidth: 1)
+                       .foregroundColor(.white)
+                       .shadow(color: .black, radius: 2, x: 2, y: 2)
+                       )
+       }
     
     private var categories : some View {
         ScrollView(.horizontal,showsIndicators: false) {

@@ -12,29 +12,47 @@ protocol ExploreViewModelProtocol : ObservableObject {
     var isEmptyData :  Bool {get}
     var isError : Bool {get}
     var errorMessage : (message:String,icon:String) {get}
-    var categoryTab : Int {get set}
+   
+
+  
     
     func changeIsPageLoaded()
     func changeIsEmpty()
     func changeIsError()
     func changeErrorMessage(message:String,icon:String)
+ 
 }
 
 
 final class ExploreViewModel : ExploreViewModelProtocol  {
-   @Published var errorMessage: (message: String, icon: String) = ("","")
+    
+    
+    @Published var errorMessage: (message: String, icon: String) = ("","")
     @Published var isEmptyData: Bool = false
     @Published var isPageLoaded: Bool = false
     @Published var isError: Bool = false
+  
     @Published var categoryTab: Int = 0
     private let serviceManger : ExploreServiceProtocol
     @Published var advertList : [Advert] = []
+    @Published var searchText : String  = ""
     
+    @Published var toSearh: Bool = false
+
+ 
+  
+
     init(serviceManger: ExploreServiceProtocol = ExploreService.shared) {
         self.serviceManger = serviceManger
         fetchAdvert()
         
     }
+    
+    
+    
+
+    
+    
     
     func fetchAdvert() {
        serviceManger.fetchAdverts { result in
@@ -53,8 +71,6 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
                 }else{
                     self.changeErrorMessage(message: "something went wrong", icon: "error")
                 }
-            
-                
             }
           
         }
@@ -85,5 +101,7 @@ extension ExploreViewModel {
             self.errorMessage = (message:message,icon:icon)
         }
     }
+    
+  
     
 }
