@@ -32,6 +32,8 @@ struct Advert: Decodable {
 // MARK: - Location
 struct Location: Codable {
     let city, country, latitude, longitude: String
+    
+
 }
 
 // MARK: - RoomCount
