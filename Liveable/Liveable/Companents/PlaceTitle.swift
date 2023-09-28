@@ -13,6 +13,7 @@ struct PlaceTitle : View {
     let id : Int
     let title : String
     let image : String
+    let viewModel : SearhViewModel
     
     var body : some View {
         Button {
@@ -41,6 +42,7 @@ extension PlaceTitle {
     private func buttonAction() {
         withAnimation {
            placeTab = id
+            viewModel.selectedLocation(text: title)
         }
     }
 }

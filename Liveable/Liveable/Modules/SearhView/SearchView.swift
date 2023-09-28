@@ -40,10 +40,6 @@ private struct GuestItem {
 struct SearchView: View {
     @Environment(\.dismiss) var dismiss
     @State private var currentTab : Int = 0
-    @State private var placeStatus : Bool = true
-    @State private var guestStatus : Bool = false
-    
-    
     @StateObject var viewModel = SearhViewModel()
     var body: some View {
         
@@ -63,25 +59,23 @@ struct SearchView: View {
             }
             
             
-            if viewModel.searhAction {
+            if viewModel.searhAction && !viewModel.isExitSearchList {
                 VStack {
                     header
                     searchViewList
-                  
+                    
                     Spacer()
                 }   .padding()
                     .background(Color.white)
                     .cornerRadius(25)
                     .padding()
             }else {
-                if placeStatus {
+                if viewModel.placeStatus {
                     openPlace
                 }else{
                     closePlace
                 }
-                
-                
-                if guestStatus {
+                if viewModel.guestStatus {
                     openGuests
                 }else{
                     closeGuest
@@ -97,25 +91,17 @@ struct SearchView: View {
                         .frame(width: UIScreen.main.bounds.width / 1.5)
                         .background(Color.pink )
                         .cornerRadius(10)
-                        .padding(.horizontal)}
+                    .padding(.horizontal)}
             }
-            
-            
-            
-           
-           
             Spacer()
         }.background(Color.gray.opacity(0.1))
-        
-        
-        
-        
-        
     }
 }
 
-
+// MARK: View Component(s)
 extension SearchView {
+    
+    //Header
     private var header: some View {
         VStack {
             Text("To Where")
@@ -124,6 +110,7 @@ extension SearchView {
             
         }
     }
+    //Search
     private var search: some View {
         HStack(spacing:20) {
             Image(systemName: "magnifyingglass")
@@ -150,7 +137,7 @@ extension SearchView {
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing:30) {
                     ForEach(MapItems.items,id:\.id) { item in
-                        PlaceTitle(placeTab: $currentTab, id: item.id, title: item.title, image: item.image)
+                        PlaceTitle(placeTab: $currentTab, id: item.id, title: item.title, image: item.image,viewModel: viewModel)
                     }
                 }
             }.padding()
@@ -165,7 +152,7 @@ extension SearchView {
         HStack {
             Text("Place")
             Spacer()
-            Text("Flexible Search")
+            Text(viewModel.searchText)
         }
         .padding()
         .background(Color.white)
@@ -173,8 +160,7 @@ extension SearchView {
         .padding()
         .onTapGesture {
             withAnimation(.linear) {
-                self.placeStatus = true
-                self.guestStatus = false
+                viewModel.placeAction()
             }
         }
     }
@@ -232,8 +218,7 @@ extension SearchView {
         .padding()
         .onTapGesture {
             withAnimation(.linear) {
-                self.placeStatus = false
-                self.guestStatus = true
+                viewModel.guestAction()
             }
         }
     }
@@ -249,9 +234,12 @@ extension SearchView {
                         .background(.gray.opacity(0.3))
                         .cornerRadius(10)
                         .padding()
-                      Text("İstanbul,Türkiye")
+                    Text("İstanbul,Türkiye")
                     Spacer()
-                   
+                    
+                }.onTapGesture {
+                    viewModel.selectedLocation(text: "İstanbul,Türkite")
+                    
                 }
                 Divider()
             }
@@ -265,20 +253,3 @@ struct SearchView_Previews: PreviewProvider {
     }
 }
 
-
-/*
- 
- Button {
-     
- } label: {
-     Text("Search")
-         .foregroundColor(.white)
-         .padding()
-         .font(.title3)
-         .frame(width: UIScreen.main.bounds.width / 1.5)
-         .background(Color.pink )
-         .cornerRadius(10)
-         .padding(.horizontal)}
- 
- 
-*/
