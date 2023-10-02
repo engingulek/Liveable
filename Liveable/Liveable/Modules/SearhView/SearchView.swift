@@ -21,19 +21,7 @@ private struct MapItems {
     ]
 }
 
-private struct GuestItem {
-    var id : Int
-    var title : String
-    var subtitle : String
-    @State var piece : Int
-    
-    static let items : [GuestItem] = [
-        GuestItem(id: 0, title: "Adults", subtitle: "13+",piece: 1),
-        GuestItem(id: 1, title: "Kids", subtitle: "2-12",piece: 0),
-        GuestItem(id: 2, title: "Babay", subtitle: "0-2",piece: 0)
-        
-    ]
-}
+
 
 
 
@@ -41,6 +29,7 @@ struct SearchView: View {
     @Environment(\.dismiss) var dismiss
     @State private var currentTab : Int = 0
     @StateObject var viewModel = SearhViewModel()
+  
     var body: some View {
         
         VStack {
@@ -169,7 +158,7 @@ extension SearchView {
         VStack(alignment: .leading,spacing: 10) {
             Text("Who is coming")
                 .font(.title)
-            ForEach(GuestItem.items,id: \.id) { item in
+            ForEach(viewModel.guestList,id: \.id) { item in
                 HStack {
                     VStack(alignment: .leading) {
                         Text(item.title)
@@ -180,21 +169,21 @@ extension SearchView {
                     Spacer()
                     
                     Button {
-                        
+                        viewModel.decreaseGuest(guestId: item.id)
                     } label: {
                         Image(systemName: "minus.circle")
-                            .foregroundColor(item.piece == 0 ? .gray : .black)
+                            .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).decrase)"])
                             .font(.title2)
-                    }
-                    
+                    }.disabled(viewModel.decraseButtonDisabled(guestId: item.id))
                     
                     Text("\(item.piece)")
                         .font(.title3)
+                        .frame(width: 30)
                     Button {
-                        
+                        viewModel.addGuest(guestId: item.id)
                     } label: {
                         Image(systemName: "plus.circle")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).add)"])
                             .font(.title2)
                     }
                 }
@@ -210,7 +199,7 @@ extension SearchView {
         HStack {
             Text("Guest")
             Spacer()
-            Text("1")
+            Text("\(viewModel.totalGuest)")
         }
         .padding()
         .background(Color.white)
