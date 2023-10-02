@@ -21,9 +21,17 @@ struct ExploreView: View {
                         search
                             .foregroundColor(.primary)
                     }
+                    
+                    if exploreViewModel.isCategoryLoaded {
+                        categories
+                    }else{
+                      ProgressView()
+                        .padding()
+                    }
 
                     
-                        categories
+                    
+                        
                     }.background(
                         Color.white
                             .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
@@ -79,13 +87,13 @@ extension ExploreView {
     private var categories : some View {
         ScrollView(.horizontal,showsIndicators: false) {
             HStack(spacing: 20) {
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 0, title: "Populer", icon: "flame")
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 1, title: "Shacks", icon: "shack")
-                
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 2, title: "Beachfront", icon: "beachfront")
-                
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 3, title: "Boats", icon: "boat")
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 4, title: "Treehouses", icon: "treehouse")
+                ForEach(exploreViewModel.categoryList,id: \.id) { category  in
+                    CategoryTitle(categoryTab: $exploreViewModel.categoryTab,
+                                  id: category.id,
+                                  title: category.name,
+                                  imageUrl: category.imageURL)
+
+                }
             }
            
         }.padding()

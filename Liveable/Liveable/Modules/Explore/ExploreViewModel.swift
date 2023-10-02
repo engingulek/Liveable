@@ -9,6 +9,7 @@ import Foundation
 
 protocol ExploreViewModelProtocol : ObservableObject {
     var isPageLoaded: Bool { get }
+    var isCategoryLoaded : Bool {get}
     var isEmptyData :  Bool {get}
     var isError : Bool {get}
     var errorMessage : (message:String,icon:String) {get}
@@ -17,6 +18,7 @@ protocol ExploreViewModelProtocol : ObservableObject {
   
     
     func changeIsPageLoaded()
+    func changeIsCategoryLoaded()
     func changeIsEmpty()
     func changeIsError()
     func changeErrorMessage(message:String,icon:String)
@@ -27,14 +29,19 @@ protocol ExploreViewModelProtocol : ObservableObject {
 final class ExploreViewModel : ExploreViewModelProtocol  {
     
     
+  
+    
+    
     @Published var errorMessage: (message: String, icon: String) = ("","")
     @Published var isEmptyData: Bool = false
     @Published var isPageLoaded: Bool = false
+    @Published var isCategoryLoaded: Bool  = false
     @Published var isError: Bool = false
   
     @Published var categoryTab: Int = 0
     private let serviceManger : ExploreServiceProtocol
     @Published var advertList : [Advert] = []
+    @Published var categoryList : [Category] = []
     @Published var searchText : String  = ""
     
     @Published var toSearh: Bool = false
@@ -45,15 +52,10 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
     init(serviceManger: ExploreServiceProtocol = ExploreService.shared) {
         self.serviceManger = serviceManger
         fetchAdvert()
+        fetchCategory()
         
     }
-    
-    
-    
-
-    
-    
-    
+ 
     func fetchAdvert() {
        serviceManger.fetchAdverts { result in
             switch result {
@@ -74,8 +76,23 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
             }
           
         }
-       
     }
+    
+    func fetchCategory(){
+        serviceManger.fetchCategory { result in
+            switch result {
+            case .success(let list):
+                DispatchQueue.main.async {
+                    self.categoryList = list ?? []
+                }
+            case .failure(let failure):
+            
+                print(failure.localizedDescription)
+            }
+            self.changeIsCategoryLoaded()
+        }
+    }
+    
 }
 
 
@@ -85,6 +102,13 @@ extension ExploreViewModel {
             self.isPageLoaded = !self.isPageLoaded
         }
     }
+    
+    func changeIsCategoryLoaded() {
+        DispatchQueue.main.async {
+            self.isCategoryLoaded = !self.isCategoryLoaded
+        }
+    }
+    
     func changeIsEmpty(){
         DispatchQueue.main.async {  [weak self] in
             guard let self = self else {return}

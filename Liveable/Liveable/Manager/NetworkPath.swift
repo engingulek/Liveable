@@ -9,6 +9,7 @@ import Foundation
 
 enum NetworkPath {
     case adverts
+    case categories
     
     static let baseUrl:String = ProductConstants.BASE_URL
     static let auth : String = ProductConstants.auth
@@ -19,6 +20,8 @@ extension NetworkPath : TargetType {
         switch self {
         case .adverts:
             return "advertList.json"
+        case .categories:
+            return "categoryList.json"
         }
     }
     
@@ -26,12 +29,16 @@ extension NetworkPath : TargetType {
         switch self {
         case .adverts:
             return .get
+        case .categories:
+            return .get
         }
     }
     
     var requestType: RequestType {
         switch self {
         case .adverts:
+            return .requestPlain
+        case .categories:
             return .requestPlain
         }
     }
