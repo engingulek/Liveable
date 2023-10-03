@@ -27,7 +27,7 @@ final class ExploreViewModelTests: XCTestCase {
     
     func test_fetchAdverts_ReturnSuccess_isPageLoadedTrue() {
        
-        let advert = Advert(baseImageURL: "", category: "", decription: "", id: 0, images: [""], location: Location(city: "", country: "", latitude: "", longitude: ""), price: 0, rating: 1.0, roomCount: RoomCount(bath: 0, bed: 0, bedroom: 0, guest: 0), title: "", userID: 0)
+        let advert = Advert(baseImageURL: "", category: 1, decription: "", id: 0, images: [""], location: Location(city: "", country: "", latitude: "", longitude: ""), price: 0, rating: 1.0, roomCount: RoomCount(bath: 0, bed: 0, bedroom: 0, guest: 0), title: "", userID: 0)
         serviceManager.mockFetchAdvert = .success([advert])
         exploreViewModel.fetchAdvert()
         
@@ -39,6 +39,24 @@ final class ExploreViewModelTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation],timeout: 2.0)
+    }
+    
+    func test_fetchAdvertFilter_ReturnEmptyData(){
+       
+        serviceManager.mockFetchAdvertFilter = .success([])
+        exploreViewModel.filterAdvertWithCategory(categoryId: 1)
+        
+        let expectation = expectation(description: "isEmptyData")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+            XCTAssertEqual(self.exploreViewModel.defaultMessage.message, "Ad not found")
+            XCTAssertEqual(self.exploreViewModel.defaultMessage.icon, "no-data")
+        
+            expectation.fulfill()
+        }
+        wait(for: [expectation],timeout: 2.0)
+        
+        
     }
     
     func test_fetchCategory_ReturnSuccess_isCategoryPageLoadedTrue() {

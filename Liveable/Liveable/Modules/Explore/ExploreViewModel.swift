@@ -32,7 +32,7 @@ protocol ExploreViewModelProtocol : ObservableObject {
 final class ExploreViewModel : ExploreViewModelProtocol  {
     
     @Published var errorMessage: (message: String, icon: String) = ("","")
-    @Published var defaultMessage: (message: String, icon: String)  = ("","")
+    @Published var defaultMessage: (message: String, icon: String)  = ("dsa","")
     @Published var isEmptyData: Bool = false
     @Published var isPageLoaded: Bool = false
     @Published var isCategoryLoaded: Bool  = false
@@ -95,25 +95,29 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
     func filterAdvertWithCategory(categoryId id : Int){
         self.changeIsPageLoaded(isLoad: false)
         if id == 0 {
+            self.changeIsEmpty()
             fetchAdvert()
         }else{
-         
             serviceManger.fetchAdvertFilter(categoryId: id) { result in
                 switch result {
-                case .success(let list):
+                case .success(let filterList):
                     self.changeIsPageLoaded(isLoad: true)
-                    var filterList : [Advert] = []
-                    /// The data does come in dic type. Convert to Array
-                    list?.forEach{ (key: String, value: Advert) in
-                        filterList.append(value)
+                    
+                        guard let list = filterList else {return}
+                        if list.isEmpty {
+                            self.changeIsEmpty()
+                            self.changeDefaultMessage(message: "Ad not found", icon: "no-data")
+                        }
+                    
+                    DispatchQueue.main.async {
+                        self.advertList = list
                     }
-                    if filterList.isEmpty {
-                        self.changeIsEmpty()
-                        self.changeDefaultMessage(message: "Ad not found", icon: "no-data")
-                    }
-                    self.advertList = filterList
+                  
+                    
                 case .failure(let failure):
-                    print(failure.localizedDescription)
+                    if failure.localizedDescription != "200" {
+                        self.categoryList =  []
+                    }
                 }
             }
         }

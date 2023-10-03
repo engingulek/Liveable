@@ -12,7 +12,7 @@ import Alamofire
 protocol ExploreServiceProtocol{
     func fetchAdverts(completion:@escaping (Result<[Advert]?,Error>)  -> ())
     func fetchCategory(completion:@escaping (Result<[Category]?,Error>)  -> ())
-func fetchAdvertFilter(categoryId id:Int,completion:@escaping(Result<AdvertFilter?,Error>) -> ())
+    func fetchAdvertFilter(categoryId id:Int,completion:@escaping(Result<[Advert]?,Error>) -> ())
     
 }
 
@@ -29,6 +29,7 @@ final class ExploreService : ExploreServiceProtocol {
         networkManager.fetch(target: .adverts, responseClass: [Advert].self) { response in
             switch response {
             case .success(let list):
+                
                 completion(.success(list ?? []))
             case .failure(let failure):
                 completion(.failure(failure))
@@ -48,13 +49,18 @@ final class ExploreService : ExploreServiceProtocol {
         }
     }
     
-    func fetchAdvertFilter(categoryId id : Int,completion:@escaping(Result<AdvertFilter?,Error>) -> ())  {
+    func fetchAdvertFilter(categoryId id : Int,completion:@escaping(Result<[Advert]?,Error>) -> ())  {
    
    
         networkManager.fetch(target: .categoryFilter(id), responseClass: AdvertFilter.self) { response in
             switch response {
             case .success(let list):
-                completion(.success(list ?? [:]))
+                var filterList : [Advert] = []
+                /// The data does come in dic type. Convert to Array
+                list?.forEach{ (key: String, value: Advert) in
+                    filterList.append(value)
+                }
+                completion(.success(filterList))
             case .failure(let failure):
                 completion(.failure(failure))
             }
