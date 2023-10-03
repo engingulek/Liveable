@@ -14,6 +14,7 @@ struct AdvertDetailView: View {
     @State private var index = 0
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Environment(\.dismiss) var dismiss
+    @StateObject private var  viewModel = AdvertDetailViewModel()
     var body: some View {
     
         ZStack(alignment:.bottom) {
@@ -52,6 +53,7 @@ struct AdvertDetailView: View {
                                         .background(.white)
                                         .clipShape(Circle())
                                 }.padding()
+                                    .padding(.vertical,25)
                             }
                            
                                 
@@ -77,14 +79,16 @@ struct AdvertDetailView: View {
                     }.padding()
                     
                     HStack {
-                        Image(systemName: "person.fill")
-                            .font(.title3)
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(.pink)
-                            .clipShape(Circle())
                         
-                        Text("Name Surname")
+                        KFImage(URL(string: viewModel.userInfo.imageURL))
+                            .resizable()
+                            .frame(width: 55,height: 55)
+                           
+                            .clipShape(Circle())
+                       
+                            
+                        
+                       Text("\(viewModel.userInfo.nameSurname)")
                             .font(.callout)
                             .fontWeight(.semibold)
                         Spacer()
@@ -148,17 +152,15 @@ struct AdvertDetailView: View {
             .background(.white)
             
         }
-       
-        
-       
-  
         .navigationBarBackButtonHidden(true)
-       
+        .onAppear{
+            viewModel.getUserInfo(userId: advert.userID)
+        }
     }
 }
 
-struct AdvertDetailView_Previews: PreviewProvider {
+/*struct AdvertDetailView_Previews: PreviewProvider {
     static var previews: some View {
         AdvertDetailView(advert: Advert.advertExample)
     }
-}
+}*/

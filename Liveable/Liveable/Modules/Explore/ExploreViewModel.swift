@@ -14,7 +14,8 @@ protocol ExploreViewModelProtocol : ObservableObject {
     var isError : Bool {get}
     var errorMessage : (message:String,icon:String) {get}
     var defaultMessage : (message:String,icon:String) {get}
-    func filterAdvertWithCategory(categoryId id : Int)
+    var isToAdvertDetailView : Bool {get}
+   
    
 
   
@@ -25,11 +26,17 @@ protocol ExploreViewModelProtocol : ObservableObject {
     func changeIsError()
     func changeErrorMessage(message:String,icon:String)
     func changeDefaultMessage(message:String,icon:String)
+    func filterAdvertWithCategory(categoryId id : Int)
+    func changeToAdvertDetailView()
  
 }
 
 
 final class ExploreViewModel : ExploreViewModelProtocol  {
+   
+    
+    
+    
     
     @Published var errorMessage: (message: String, icon: String) = ("","")
     @Published var defaultMessage: (message: String, icon: String)  = ("dsa","")
@@ -44,12 +51,16 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
     @Published var categoryList : [Category] = []
     @Published var searchText : String  = ""
     @Published var toSearh: Bool = false
+   @Published var isToAdvertDetailView: Bool = false
 
+    
  
   
 
     init(serviceManger: ExploreServiceProtocol = ExploreService.shared) {
         self.serviceManger = serviceManger
+        fetchAdvert()
+        fetchCategory()
     }
  
     func fetchAdvert() {
@@ -160,6 +171,12 @@ extension ExploreViewModel {
     func changeDefaultMessage(message: String, icon: String) {
         DispatchQueue.main.async {
             self.defaultMessage = (message:message,icon:icon)
+        }
+    }
+    
+    func changeToAdvertDetailView() {
+        DispatchQueue.main.async {
+            self.isToAdvertDetailView = !self.isToAdvertDetailView
         }
     }
     

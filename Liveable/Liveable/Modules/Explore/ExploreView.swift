@@ -53,7 +53,7 @@ struct ExploreView: View {
                                     .font(.title2)
                             }.padding(.top,100)
                         }else{
-                            listAdvert
+                           listAdvert
                         }
                         
                     }
@@ -63,9 +63,6 @@ struct ExploreView: View {
                 }
                 Spacer()
             }
-        }.onAppear{
-            exploreViewModel.fetchAdvert()
-            exploreViewModel.fetchCategory()
         }
     }
 }
@@ -122,16 +119,15 @@ extension ExploreView {
                 VStack(spacing:35){
                     
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
-                        NavigationLink {
-                            AdvertDetailView(advert: advert)
-                                .edgesIgnoringSafeArea(.top)
-                              
-                        } label: {
-                            AdvertDesign(advert: advert)
-                                .foregroundColor(.primary)
-                        }
-
-                      
+                        
+                        AdvertDesign(advert: advert)
+                            .foregroundColor(.primary)
+                            .onTapGesture {
+                                exploreViewModel.changeToAdvertDetailView()
+                            }.fullScreenCover(isPresented: $exploreViewModel.isToAdvertDetailView) {
+                                AdvertDetailView(advert: advert)
+                                    .edgesIgnoringSafeArea(.top)
+                            }
                     }
                 }
             }

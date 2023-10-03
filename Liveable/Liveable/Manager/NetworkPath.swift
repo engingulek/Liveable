@@ -11,6 +11,7 @@ enum NetworkPath {
     case adverts
     case categories
     case categoryFilter(Int)
+    case userInfo(Int)
     
     static let baseUrl:String = ProductConstants.BASE_URL
     static let auth : String  = "zR45PQS3lkRWU7TEEJNosjYVadRJ1JSpxpnulT6z"
@@ -26,6 +27,8 @@ extension NetworkPath : TargetType {
             return "categoryList.json"
         case .categoryFilter(let id):
             return "advertList.json?orderBy=\"category\"&equalTo=\(id)"
+        case .userInfo(let id):
+            return "userList.json?orderBy=\"id\"&equalTo=\(id)"
         }
     }
     
@@ -37,16 +40,15 @@ extension NetworkPath : TargetType {
             return .get
         case .categoryFilter:
             return .get
+        
+        case .userInfo:
+            return .get
         }
     }
     
     var requestType: RequestType {
         switch self {
-        case .adverts:
-            return .requestPlain
-        case .categories:
-            return .requestPlain
-        case .categoryFilter:
+        default:
             return .requestPlain
         }
     }
