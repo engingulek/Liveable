@@ -28,9 +28,6 @@ struct ExploreView: View {
                       ProgressView()
                         .padding()
                     }
-
-                    
-                    
                         
                     }.background(
                         Color.white
@@ -47,7 +44,18 @@ struct ExploreView: View {
                                 .font(.title2)
                         }.padding(.top,100)
                     }else{
-                        listAdvert
+                        if exploreViewModel.isEmptyData {
+                            VStack(alignment:.center) {
+                                Image(exploreViewModel.defaultMessage.icon)
+                                    .resizable()
+                                    .frame(width: 100,height: 100)
+                                Text(exploreViewModel.defaultMessage.message)
+                                    .font(.title2)
+                            }.padding(.top,100)
+                        }else{
+                            listAdvert
+                        }
+                        
                     }
                 }else{
                   ProgressView()
@@ -55,6 +63,9 @@ struct ExploreView: View {
                 }
                 Spacer()
             }
+        }.onAppear{
+            exploreViewModel.fetchAdvert()
+            exploreViewModel.fetchCategory()
         }
     }
 }
@@ -91,8 +102,13 @@ extension ExploreView {
                     CategoryTitle(categoryTab: $exploreViewModel.categoryTab,
                                   id: category.id,
                                   title: category.name,
-                                  imageUrl: category.imageURL)
-
+                                  imageUrl: category.imageURL,
+                                  viewModel:exploreViewModel
+                    
+                    )
+                   
+                   
+                   
                 }
             }
            
@@ -104,6 +120,7 @@ extension ExploreView {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing:35){
+                    
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
                         NavigationLink {
                             AdvertDetailView(advert: advert)

@@ -6,12 +6,14 @@
 //
 
 import Foundation
-
+import Alamofire
 
 
 protocol ExploreServiceProtocol{
     func fetchAdverts(completion:@escaping (Result<[Advert]?,Error>)  -> ())
     func fetchCategory(completion:@escaping (Result<[Category]?,Error>)  -> ())
+func fetchAdvertFilter(categoryId id:Int,completion:@escaping(Result<AdvertFilter?,Error>) -> ())
+    
 }
 
 final class ExploreService : ExploreServiceProtocol {
@@ -40,6 +42,19 @@ final class ExploreService : ExploreServiceProtocol {
             switch response {
             case .success(let list):
                 completion(.success(list ?? []))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+    }
+    
+    func fetchAdvertFilter(categoryId id : Int,completion:@escaping(Result<AdvertFilter?,Error>) -> ())  {
+   
+   
+        networkManager.fetch(target: .categoryFilter(id), responseClass: AdvertFilter.self) { response in
+            switch response {
+            case .success(let list):
+                completion(.success(list ?? [:]))
             case .failure(let failure):
                 completion(.failure(failure))
             }

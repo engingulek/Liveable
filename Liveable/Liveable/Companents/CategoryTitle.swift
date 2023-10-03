@@ -13,6 +13,7 @@ struct CategoryTitle: View {
     let id : Int
     let title : String
     let imageUrl : String
+    let viewModel : ExploreViewModel
     var body: some View {
         Button {
             buttonAction()
@@ -41,6 +42,7 @@ extension CategoryTitle {
     private func buttonAction() {
         withAnimation {
             categoryTab = id
+            viewModel.filterAdvertWithCategory(categoryId: id)
         }
     }
 }
@@ -49,7 +51,7 @@ struct CategoryTitle_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             ForEach(Category.categoryExample,id: \.id) { category in
-                CategoryTitle(categoryTab: .constant(0), id: category.id, title: category.name, imageUrl: category.imageURL)
+                CategoryTitle(categoryTab: .constant(0), id: category.id, title: category.name, imageUrl: category.imageURL,viewModel: ExploreViewModel())
             }
         }
        
