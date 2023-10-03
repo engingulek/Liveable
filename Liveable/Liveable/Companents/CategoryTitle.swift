@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct CategoryTitle: View {
     @Binding var categoryTab : Int
     private var isSelected : Bool { categoryTab == id}
     let id : Int
     let title : String
-    let icon : String
+    let imageUrl : String
+    let viewModel : ExploreViewModel
     var body: some View {
         Button {
             buttonAction()
@@ -26,7 +27,7 @@ struct CategoryTitle: View {
 extension CategoryTitle {
     private var category : some View {
         VStack {
-            Image(icon)
+            KFImage(URL(string: imageUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30,height: 30)
@@ -41,6 +42,7 @@ extension CategoryTitle {
     private func buttonAction() {
         withAnimation {
             categoryTab = id
+            viewModel.filterAdvertWithCategory(categoryId: id)
         }
     }
 }
@@ -48,8 +50,9 @@ extension CategoryTitle {
 struct CategoryTitle_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            CategoryTitle(categoryTab: .constant(0), id: 0, title: "Populer", icon: "flame")
-           
+            ForEach(Category.categoryExample,id: \.id) { category in
+                CategoryTitle(categoryTab: .constant(0), id: category.id, title: category.name, imageUrl: category.imageURL,viewModel: ExploreViewModel())
+            }
         }
        
     }

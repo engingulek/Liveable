@@ -21,9 +21,14 @@ struct ExploreView: View {
                         search
                             .foregroundColor(.primary)
                     }
-
                     
+                    if exploreViewModel.isCategoryLoaded {
                         categories
+                    }else{
+                      ProgressView()
+                        .padding()
+                    }
+                        
                     }.background(
                         Color.white
                             .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
@@ -39,7 +44,18 @@ struct ExploreView: View {
                                 .font(.title2)
                         }.padding(.top,100)
                     }else{
-                        listAdvert
+                        if exploreViewModel.isEmptyData {
+                            VStack(alignment:.center) {
+                                Image(exploreViewModel.defaultMessage.icon)
+                                    .resizable()
+                                    .frame(width: 100,height: 100)
+                                Text(exploreViewModel.defaultMessage.message)
+                                    .font(.title2)
+                            }.padding(.top,100)
+                        }else{
+                            listAdvert
+                        }
+                        
                     }
                 }else{
                   ProgressView()
@@ -47,6 +63,9 @@ struct ExploreView: View {
                 }
                 Spacer()
             }
+        }.onAppear{
+            exploreViewModel.fetchAdvert()
+            exploreViewModel.fetchCategory()
         }
     }
 }
@@ -79,13 +98,18 @@ extension ExploreView {
     private var categories : some View {
         ScrollView(.horizontal,showsIndicators: false) {
             HStack(spacing: 20) {
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 0, title: "Populer", icon: "flame")
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 1, title: "Shacks", icon: "shack")
-                
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 2, title: "Beachfront", icon: "beachfront")
-                
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 3, title: "Boats", icon: "boat")
-                CategoryTitle(categoryTab: $exploreViewModel.categoryTab,id: 4, title: "Treehouses", icon: "treehouse")
+                ForEach(exploreViewModel.categoryList,id: \.id) { category  in
+                    CategoryTitle(categoryTab: $exploreViewModel.categoryTab,
+                                  id: category.id,
+                                  title: category.name,
+                                  imageUrl: category.imageURL,
+                                  viewModel:exploreViewModel
+                    
+                    )
+                   
+                   
+                   
+                }
             }
            
         }.padding()
@@ -96,6 +120,7 @@ extension ExploreView {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing:35){
+                    
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
                         NavigationLink {
                             AdvertDetailView(advert: advert)

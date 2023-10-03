@@ -15,7 +15,7 @@ enum CustomError : Error{
 
 struct NetworkConfig {
     let baseUrl : String
-    let auth :String
+
 }
 
 protocol NetworkManagerProtocol {
@@ -29,20 +29,26 @@ final class NetworkManager : NetworkManagerProtocol {
         self.config = config
     }
     
-    static let shared : NetworkManagerProtocol = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseUrl,auth: NetworkPath.auth))
+    static let shared : NetworkManagerProtocol = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseUrl))
     
     func fetch<T:Decodable>(target:NetworkPath,responseClass:T.Type,completion:@escaping (Result<T?,Error>) -> ())  {
-        let url = "\(config.baseUrl)\(target.path)?auth=\(config.auth)"
+        let url = "\(config.baseUrl)\(target.path)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         let method = Alamofire.HTTPMethod(rawValue: target.method.rawValue)
         let headers = Alamofire.HTTPHeaders(target.headers ?? [:])
                 let parameters = buildParams(requestType: target.requestType)
-        AF.request(url,method: method,parameters: parameters.0,encoding: parameters.1,headers: headers)
+
+       
+       
+        AF.request(url!,method: method,parameters: parameters.0,encoding: parameters.1,headers: headers)
             .response{ response in
                 if let data = response.data {
+                    
                     do {
                         let result = try JSONDecoder().decode(T.self, from: data)
                         completion(.success(result))
                     }catch{
+                        print(error.localizedDescription)
                         if let statusCode = response.response?.statusCode {
                             print(statusCode)
                             if statusCode == 404{
