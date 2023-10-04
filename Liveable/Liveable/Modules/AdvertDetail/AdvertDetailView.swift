@@ -26,7 +26,6 @@ struct AdvertDetailView: View {
                         advertCityAndCountry
                         ownerInfo
                         advertDesc
-                        
                         VStack {
                             Map(coordinateRegion: $region)
                                         .frame(height: 200)
@@ -45,6 +44,7 @@ struct AdvertDetailView: View {
             .edgesIgnoringSafeArea(.top)
             .onAppear{
                 viewModel.getUserInfo(userId: advert.userID)
+                viewModel.fetchAdvertComment(advertId: advert.id)
             }
         }.tint(.black)
     }
@@ -159,12 +159,12 @@ extension AdvertDetailView {
         VStack {
             ScrollView(.horizontal,showsIndicators: false) {
                 LazyHStack {
-                    ForEach(0..<9,id:\.self) { comment  in
+                    ForEach(viewModel.advertCommentDic.keys.sorted(by: <), id: \.self) { index in
                         
                         NavigationLink {
-                            AllReviewView(selectedComment: comment)
+                            AllReviewView(selectedComment: viewModel.advertCommentDic[index]?.id ?? 0, advertId: advert.id)
                         } label: {
-                            AdvertComment(stateLineLimit: true)
+                            AdvertComment(stateLineLimit: true, comment: viewModel.advertCommentDic[index])
                                 .frame(width: UIScreen.main.bounds.width / 1.2)
                                 .foregroundColor(.primary)
                         }
@@ -172,7 +172,7 @@ extension AdvertDetailView {
                 }
             }
             NavigationLink {
-                AllReviewView()
+                AllReviewView(advertId: advert.id)
             } label: {
                 Text("Show All Reviews")
                     .foregroundColor(.black)

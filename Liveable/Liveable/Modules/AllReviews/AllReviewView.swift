@@ -10,16 +10,21 @@ import SwiftUI
 
 struct AllReviewView: View {
     
+    @StateObject var viewModel = AllReviewViewModel()
     var selectedComment : Int = 0
+    var advertId : Int
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: false) {
             ScrollViewReader { scrollView in // --> Here
                 LazyVStack{
+                    Text("\(viewModel.advertCommentDic.count) Reviews")
+                        .font(.title2)
+                        .fontWeight(.semibold)
                     
-                    ForEach(Comment.comments.indices, id: \.self) { index in
-                        AdvertComment()
-                        // .id(Comment.comments[index])
+                    ForEach(viewModel.advertCommentDic.keys.sorted(by: <), id: \.self) { index in
+                        AdvertComment(comment: viewModel.advertCommentDic[index])
+                            .id(viewModel.advertCommentDic[index]?.id ?? 0)
                     }
                 }
                 .padding()
@@ -27,12 +32,14 @@ struct AllReviewView: View {
                     scrollView.scrollTo(selectedComment, anchor: .center) // ---> Here
                 }
             }
+        }.onAppear{
+            viewModel.fetchAdvertComment(advertId: advertId)
         }
     }
 }
 
 struct AllReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        AllReviewView()
+        AllReviewView(advertId: -1)
     }
 }

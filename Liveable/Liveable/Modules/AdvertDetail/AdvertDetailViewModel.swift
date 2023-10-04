@@ -18,7 +18,7 @@ final class AdvertDetailViewModel : AdvertDetailViewModelProtocol {
     }
     
     @Published var userInfo : UserInfo = UserInfo.defaultUserInfo
-    
+    @Published var advertCommentDic : Comment = [:]
     func getUserInfo(userId id : Int) {
         serviceManager.fetchUserInfo(userId: id) { response in
             switch response {
@@ -30,6 +30,21 @@ final class AdvertDetailViewModel : AdvertDetailViewModelProtocol {
             case .failure(let failure):
                 print("aLİ \(failure.localizedDescription)")
                 self.userInfo = UserInfo.defaultUserInfo
+            }
+        }
+    }
+    
+    
+    
+    func fetchAdvertComment(advertId:Int) {
+        serviceManager.fetchAllComment(advertId:advertId) { result in
+            switch result {
+            case .success(let dic):
+                DispatchQueue.main.async {
+                    self.advertCommentDic = dic ?? [:]
+                }
+            case .failure(let failure):
+                print("ARVM \(failure.localizedDescription)")
             }
         }
     }

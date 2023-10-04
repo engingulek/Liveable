@@ -9,10 +9,11 @@ import SwiftUI
 
 struct AdvertComment: View {
     var stateLineLimit : Bool = false
+    let comment: CommnetValue?
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
             
-            Text("He is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It ha")
+            Text(comment?.commentText ?? "")
                 .lineLimit(stateLineLimit ? 4 : 10)
                 .font(.callout)
             
@@ -25,9 +26,9 @@ struct AdvertComment: View {
                     .background(.pink)
                     .clipShape(Circle())
                 VStack(alignment:.leading){
-                    Text("Name")
+                    Text(comment?.commneterUser.nameSurname ?? "")
                         .font(.callout)
-                    Text("2 month ago")
+                    Text(comment?.commnetData ?? "")
                         .font(.caption2)
                         .foregroundColor(.gray)
                 }
@@ -43,8 +44,10 @@ struct AdvertComment: View {
     }
 }
 
-struct AdvertComment_Previews: PreviewProvider {
+
+//add will explation
+/*struct AdvertComment_Previews: PreviewProvider {
     static var previews: some View {
         AdvertComment()
     }
-}
+}*/
