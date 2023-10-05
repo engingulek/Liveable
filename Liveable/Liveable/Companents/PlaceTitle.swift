@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct PlaceTitle : View {
     @Binding var placeTab : Int
     private var isSelected : Bool {placeTab == id}
@@ -28,7 +28,7 @@ struct PlaceTitle : View {
 extension PlaceTitle {
     private var place : some View {
         VStack(alignment:.leading) {
-            Image(image)
+            KFImage(URL(string: image))
                 .resizable()
                 .frame(width: 100,height:100)
                 .border(isSelected ? .black : .white ,width: 2)

@@ -15,25 +15,27 @@ protocol ExploreViewModelProtocol : ObservableObject {
     var errorMessage : (message:String,icon:String) {get}
     var defaultMessage : (message:String,icon:String) {get}
     var isToAdvertDetailView : Bool {get}
+    var isToSearchView : Bool {get}
    
    
 
   
     
     func changeIsPageLoaded(isLoad:Bool)
-    func changeIsCategoryLoaded()
     func changeIsEmpty()
     func changeIsError()
+    func changeIsCategoryLoaded()
     func changeErrorMessage(message:String,icon:String)
     func changeDefaultMessage(message:String,icon:String)
     func filterAdvertWithCategory(categoryId id : Int)
     func changeToAdvertDetailView()
+    func changeisToSearchView()
  
 }
 
 
 final class ExploreViewModel : ExploreViewModelProtocol  {
-   
+    
     
     
     
@@ -52,6 +54,7 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
     @Published var searchText : String  = ""
     @Published var toSearh: Bool = false
    @Published var isToAdvertDetailView: Bool = false
+   @Published var isToSearchView: Bool = false
 
     
  
@@ -179,6 +182,12 @@ extension ExploreViewModel {
             self.isToAdvertDetailView = !self.isToAdvertDetailView
         }
     }
+    
+    
+    func changeisToSearchView() {
+        self.isToSearchView = true
+    }
+    
     
   
     

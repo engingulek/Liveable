@@ -13,6 +13,10 @@ enum NetworkPath {
     case categoryFilter(Int)
     case userInfo(Int)
     case advertComment(Int)
+    case cityList
+    case mapCountryList
+    case searchAdvertByCity(String)
+    case searchAdvertByCountry(String)
     
     static let baseUrl:String = ProductConstants.BASE_URL
     static let auth : String  = "zR45PQS3lkRWU7TEEJNosjYVadRJ1JSpxpnulT6z"
@@ -32,21 +36,21 @@ extension NetworkPath : TargetType {
             return "userList.json?orderBy=\"id\"&equalTo=\(id)"
         case .advertComment(let id):
             return "commentList.json?orderBy=\"advertOwnerId\"&equalTo=\(id)"
+        case .cityList:
+            return "cityList.json"
+        case .mapCountryList:
+            return "mapCountryList.json"
+        case .searchAdvertByCity(let text):
+            return "advertList.json?orderBy=\"location/country\"&equalTo=\"\(text)\""
+        case .searchAdvertByCountry(let text):
+            return "advertList.json?orderBy=\"location/country\"&equalTo=\"\(text)\""
+            
         }
     }
     
     var method: AlamofireMethod {
         switch self {
-        case .adverts:
-            return .get
-        case .categories:
-            return .get
-        case .categoryFilter:
-            return .get
-        
-        case .userInfo:
-            return .get
-        case .advertComment:
+        default:
             return .get
         }
     }
