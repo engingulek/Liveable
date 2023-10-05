@@ -189,7 +189,7 @@ extension AdvertDetailView {
     
     private var reserver : some View {
         HStack {
-            Text("$\(advert.price) night")
+            Text("$\(advert.price.adult) night")
                 .font(.title2)
                 .fontWeight(.semibold)
             Spacer()

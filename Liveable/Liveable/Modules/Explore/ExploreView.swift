@@ -9,18 +9,17 @@ import SwiftUI
 
 struct ExploreView: View {
     @StateObject private  var exploreViewModel = ExploreViewModel()
-
+    
     var body: some View {
         NavigationView {
             VStack {
                 VStack {
-                    NavigationLink {
+                    search.onTapGesture {
+                        exploreViewModel.changeisToSearchView()
+                    }.fullScreenCover(isPresented: $exploreViewModel.isToSearchView ) {
                         SearchView()
-                            .navigationBarBackButtonHidden()
-                    } label: {
-                        search
-                            .foregroundColor(.primary)
                     }
+                   
                     
                     if exploreViewModel.isCategoryLoaded {
                         categories

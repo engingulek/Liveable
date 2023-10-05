@@ -40,7 +40,7 @@ struct AdvertDesign: View {
                 .foregroundColor(.gray)
             HStack(spacing:2) {
                 Spacer()
-                Text("\(advert.price)")
+                Text("\(advert.price.adult)")
                     .font(.title2)
                     .fontWeight(.semibold)
                 Text(" night")

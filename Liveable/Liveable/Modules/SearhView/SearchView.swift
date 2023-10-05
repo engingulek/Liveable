@@ -7,24 +7,6 @@
 
 import SwiftUI
 
-private struct MapItems {
-    var id:Int
-    var image:String
-    var title:String
-    
-    
-    static let items : [MapItems] = [
-        MapItems(id: 0, image: "earth", title: "Flexible Search"),
-        MapItems(id: 2, image: "turkey", title: "Türkiye"),
-        MapItems(id: 3, image: "usa", title: "USA")
-        
-    ]
-}
-
-
-
-
-
 struct SearchView: View {
     @Environment(\.dismiss) var dismiss
     @State private var currentTab : Int = 0
@@ -51,6 +33,7 @@ struct SearchView: View {
             if viewModel.searhAction && !viewModel.isExitSearchList {
                 VStack {
                     header
+                   
                     searchViewList
                     
                     Spacer()
@@ -71,7 +54,7 @@ struct SearchView: View {
                 }
                 
                 Button {
-                    
+                    viewModel.toSearchResultViewAction()
                 } label: {
                     Text("Search")
                         .foregroundColor(.white)
@@ -80,8 +63,13 @@ struct SearchView: View {
                         .frame(width: UIScreen.main.bounds.width / 1.5)
                         .background(Color.pink )
                         .cornerRadius(10)
-                    .padding(.horizontal)}
+                    .padding(.horizontal)
+                    
+                }.fullScreenCover(isPresented: $viewModel.isToSearchResultView) {
+                    SearchResultView(searchText: viewModel.searchText, guest: viewModel.guestList)
+                }
             }
+              
             Spacer()
         }.background(Color.gray.opacity(0.1))
     }
@@ -105,7 +93,7 @@ extension SearchView {
             Image(systemName: "magnifyingglass")
                 .font(.title2)
             VStack(alignment:.leading){
-                TextField("Search for destination",text:$viewModel.searchText)
+                TextField("Search for City",text:$viewModel.searchText)
                     .foregroundColor(.gray)
                     .fontWeight(.semibold)
                     .font(.callout)
@@ -119,16 +107,30 @@ extension SearchView {
             )
     }
     
-    
     private var openPlace :  some View {
         VStack {
             header
+            Text("or by country search")
+                .padding()
+                .foregroundColor(.pink)
+                .fontWeight(.semibold)
             ScrollView(.horizontal,showsIndicators: false) {
-                HStack(spacing:30) {
-                    ForEach(MapItems.items,id:\.id) { item in
-                        PlaceTitle(placeTab: $currentTab, id: item.id, title: item.title, image: item.image,viewModel: viewModel)
+                if viewModel.isMapCountryListLoded {
+                    if !viewModel.isMapCountryListError {
+                        HStack(spacing:30) {
+                            ForEach(viewModel.mapCountryList,id:\.id) { item in
+                                PlaceTitle(placeTab: $currentTab, id: item.id, title: item.title, image: item.imageURL,viewModel: viewModel)
+                            }
+                        }
+                    }else{
+                        Text(viewModel.isMapCountryListErrorMessage)
+                            .fontWeight(.semibold)
+                            .font(.title3)
                     }
+                }else{
+                    ProfileView().padding(50)
                 }
+               
             }.padding()
         }
         .padding()
@@ -214,7 +216,7 @@ extension SearchView {
     
     private var searchViewList : some View {
         ScrollView {
-            ForEach(0..<3,id:\.self) { item in
+            ForEach(viewModel.cityList,id:\.id) { city in
                 HStack {
                     Image(systemName: "mappin.circle.fill")
                         .resizable()
@@ -223,11 +225,11 @@ extension SearchView {
                         .background(.gray.opacity(0.3))
                         .cornerRadius(10)
                         .padding()
-                    Text("İstanbul,Türkiye")
+                    Text(city.title)
                     Spacer()
                     
                 }.onTapGesture {
-                    viewModel.selectedLocation(text: "İstanbul,Türkite")
+                    viewModel.selectedLocation(text: city.title)
                     
                 }
                 Divider()
@@ -238,7 +240,10 @@ extension SearchView {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        NavigationView {
+            SearchView()
+        }
+        
     }
 }
 
