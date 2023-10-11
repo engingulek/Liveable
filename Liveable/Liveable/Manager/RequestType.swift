@@ -11,10 +11,12 @@ import Alamofire
 
 enum AlamofireMethod: String {
     case get = "GET"
+    case post = "POST"
 }
 
 enum RequestType {
     case requestPlain
+    case requestParameters(parameters: Parameters, encoding: ParameterEncoding)
 }
 
 protocol TargetType {

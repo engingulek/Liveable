@@ -9,6 +9,10 @@ import Foundation
 import Alamofire
 
 
+
+
+
+
 protocol ExploreServiceProtocol{
     func fetchAdverts(completion:@escaping (Result<[Advert]?,Error>)  -> ())
     func fetchCategory(completion:@escaping (Result<[Category]?,Error>)  -> ())
@@ -17,7 +21,7 @@ protocol ExploreServiceProtocol{
 }
 
 final class ExploreService : ExploreServiceProtocol {
-    
+
     let networkManager: NetworkManagerProtocol
     static let shared = ExploreService()
     
@@ -52,7 +56,7 @@ final class ExploreService : ExploreServiceProtocol {
     func fetchAdvertFilter(categoryId id : Int,completion:@escaping(Result<[Advert]?,Error>) -> ())  {
    
    
-        networkManager.fetch(target: .categoryFilter(id), responseClass: AdvertFilter.self) { response in
+        networkManager.fetch(target: .categoryFilter(id), responseClass: AdvertDic.self) { response in
             switch response {
             case .success(let list):
                 var filterList : [Advert] = []
@@ -66,13 +70,5 @@ final class ExploreService : ExploreServiceProtocol {
             }
         }
     }
-    
-    
-  
-    
-   
-    
-   
-    
-    
 }
+

@@ -8,8 +8,8 @@
 import Foundation
 
 protocol SearchResultServiceProtocol {
-    func searchByCountry(text:String,completion:@escaping(Result<AdvertFilter,Error>)->())
-    func searchByCity(text:String,completion:@escaping(Result<AdvertFilter,Error>)->())
+    func searchByCountry(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
+    func searchByCity(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
 }
 
 final class SearchResultService :  SearchResultServiceProtocol {
@@ -21,8 +21,8 @@ final class SearchResultService :  SearchResultServiceProtocol {
         self.networkManager = networkManager
     }
     
-    func searchByCountry(text: String, completion: @escaping (Result<AdvertFilter, Error>) -> ()) {
-        networkManager.fetch(target: .searchAdvertByCountry(text), responseClass: AdvertFilter.self) { response in
+    func searchByCountry(text: String, completion: @escaping (Result<AdvertDic, Error>) -> ()) {
+        networkManager.fetch(target: .searchAdvertByCountry(text), responseClass: AdvertDic.self) { response in
             switch response {
             case .success(let dic):
                 
@@ -33,8 +33,8 @@ final class SearchResultService :  SearchResultServiceProtocol {
         }
     }
     
-    func searchByCity(text: String, completion: @escaping (Result<AdvertFilter, Error>) -> ()) {
-        networkManager.fetch(target: .searchAdvertByCity(text), responseClass: AdvertFilter.self) { response in
+    func searchByCity(text: String, completion: @escaping (Result<AdvertDic, Error>) -> ()) {
+        networkManager.fetch(target: .searchAdvertByCity(text), responseClass: AdvertDic.self) { response in
             switch response {
             case .success(let dic):
                 completion(.success(dic ?? [:]))

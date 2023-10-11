@@ -66,7 +66,7 @@ struct ExploreView: View {
     }
 }
 
-
+// MARK: - UI Component(s)
 extension ExploreView {
     private var search: some View {
            HStack(spacing:20) {
@@ -119,7 +119,7 @@ extension ExploreView {
                     
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
                         
-                        AdvertDesign(advert: advert)
+                        AdvertDesign(advert: advert,viewModel: exploreViewModel)
                             .foregroundColor(.primary)
                             .onTapGesture {
                                 exploreViewModel.changeToAdvertDetailView()

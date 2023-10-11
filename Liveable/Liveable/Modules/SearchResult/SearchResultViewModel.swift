@@ -22,7 +22,7 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
     @Published  var isPageLoaded: Bool = false
     @Published var isEmptyData: Bool = false
     @Published  var isError: Bool = false
-    @Published var searchAdvertList : AdvertFilter = [:]
+    @Published var searchAdvertList : AdvertDic = [:]
     
     
     

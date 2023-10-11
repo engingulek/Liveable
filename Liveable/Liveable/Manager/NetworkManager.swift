@@ -20,7 +20,7 @@ struct NetworkConfig {
 
 protocol NetworkManagerProtocol {
     var config : NetworkConfig {get set}
-    func fetch<T:Decodable>(target:NetworkPath,responseClass:T.Type,completion:@escaping (Result<T?,Error>) -> ())
+    func fetch<T:Codable>(target:NetworkPath,responseClass:T.Type,completion:@escaping (Result<T?,Error>) -> ())
 }
 
 final class NetworkManager : NetworkManagerProtocol {
@@ -31,16 +31,17 @@ final class NetworkManager : NetworkManagerProtocol {
     
     static let shared : NetworkManagerProtocol = NetworkManager(config: NetworkConfig(baseUrl: NetworkPath.baseUrl))
     
-    func fetch<T:Decodable>(target:NetworkPath,responseClass:T.Type,completion:@escaping (Result<T?,Error>) -> ())  {
+    func fetch<T:Codable>(target:NetworkPath,responseClass:T.Type,completion:@escaping (Result<T?,Error>) -> ())  {
         let url = "\(config.baseUrl)\(target.path)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         let method = Alamofire.HTTPMethod(rawValue: target.method.rawValue)
         let headers = Alamofire.HTTPHeaders(target.headers ?? [:])
-                let parameters = buildParams(requestType: target.requestType)
+        let parameters = buildParams(requestType: target.requestType)
 
+        
+      
        
-       
-        AF.request(url!,method: method,parameters: parameters.0,encoding: parameters.1,headers: headers)
+        AF.request(url!,method: method,parameters: parameters.0 as? Parameters ,encoding: parameters.1,headers: headers)
             .response{ response in
                 if let data = response.data {
                     
@@ -61,13 +62,14 @@ final class NetworkManager : NetworkManagerProtocol {
                 }
                 
             }
- 
     }
     
-    private func buildParams(requestType: RequestType) -> ([String: Any], ParameterEncoding) {
+    private func buildParams(requestType: RequestType) -> ([String:Any], ParameterEncoding) {
             switch requestType {
             case .requestPlain:
                 return ([:], URLEncoding.default)
+            case .requestParameters(parameters: let parameters, encoding: let encoding):
+                return (parameters, encoding)
             }
         }
 }

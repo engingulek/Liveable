@@ -8,22 +8,16 @@
 import SwiftUI
 struct AdvertDesign: View {
     let advert  : Advert
+    let viewModel : ExploreViewModel
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
-            ZStack(alignment:.topTrailing) {
+           
                 AsyncImage(url: URL(string: advert.baseImageURL)) { image in
                     image.image?.resizable()
                         .frame(height: UIScreen.main.bounds.height / 4)
                         .cornerRadius(20)
                 }
-                
-                Image(systemName: "heart")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding()
-            }
-           
-               
+            
             HStack {
                 Text("\(advert.title)- \(advert.location.city),\(advert.location.country)")
                     .fontWeight(.semibold)
@@ -55,6 +49,6 @@ struct AdvertDesign: View {
 
 struct AdvertDesign_Previews: PreviewProvider {
     static var previews: some View {
-        AdvertDesign(advert: Advert.advertExample)
+        AdvertDesign(advert: Advert.advertExample,viewModel: ExploreViewModel())
     }
 }
