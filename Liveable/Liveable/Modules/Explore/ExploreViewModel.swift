@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Alamofire
 protocol ExploreViewModelProtocol : ObservableObject {
     var isPageLoaded: Bool { get }
     var isCategoryLoaded : Bool {get}
@@ -16,6 +16,7 @@ protocol ExploreViewModelProtocol : ObservableObject {
     var defaultMessage : (message:String,icon:String) {get}
     var isToAdvertDetailView : Bool {get}
     var isToSearchView : Bool {get}
+   
    
    
 
@@ -30,18 +31,20 @@ protocol ExploreViewModelProtocol : ObservableObject {
     func filterAdvertWithCategory(categoryId id : Int)
     func changeToAdvertDetailView()
     func changeisToSearchView()
- 
+    
 }
 
 
 final class ExploreViewModel : ExploreViewModelProtocol  {
+ 
     
+   
     
     
     
     
     @Published var errorMessage: (message: String, icon: String) = ("","")
-    @Published var defaultMessage: (message: String, icon: String)  = ("dsa","")
+    @Published var defaultMessage: (message: String, icon: String)  = ("","")
     @Published var isEmptyData: Bool = false
     @Published var isPageLoaded: Bool = false
     @Published var isCategoryLoaded: Bool  = false
@@ -56,14 +59,11 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
    @Published var isToAdvertDetailView: Bool = false
    @Published var isToSearchView: Bool = false
 
-    
- 
-  
-
     init(serviceManger: ExploreServiceProtocol = ExploreService.shared) {
         self.serviceManger = serviceManger
         fetchAdvert()
         fetchCategory()
+       
     }
  
     func fetchAdvert() {
@@ -87,6 +87,8 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
           
         }
     }
+    
+   
     
     func fetchCategory(){
         
@@ -136,9 +138,12 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
             }
         }
     }
+    
+  
 
     
 }
+
 
 
 extension ExploreViewModel {
@@ -185,8 +190,13 @@ extension ExploreViewModel {
     
     
     func changeisToSearchView() {
-        self.isToSearchView = true
+        DispatchQueue.main.async {
+            self.isToSearchView = true
+        }
+        
     }
+    
+   
     
     
   

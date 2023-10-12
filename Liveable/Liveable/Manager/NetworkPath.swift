@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Alamofire
 enum NetworkPath {
     case adverts
     case categories
@@ -17,6 +17,10 @@ enum NetworkPath {
     case mapCountryList
     case searchAdvertByCity(String)
     case searchAdvertByCountry(String)
+    case savedList(String)
+    case addAdvertToSavedList(String,Parameters)
+    case deleteAdvertFromSavedList(String,String)
+    
     
     static let baseUrl:String = ProductConstants.BASE_URL
     static let auth : String  = "zR45PQS3lkRWU7TEEJNosjYVadRJ1JSpxpnulT6z"
@@ -44,12 +48,22 @@ extension NetworkPath : TargetType {
             return "advertList.json?orderBy=\"location/country\"&equalTo=\"\(text)\""
         case .searchAdvertByCountry(let text):
             return "advertList.json?orderBy=\"location/country\"&equalTo=\"\(text)\""
+        case .addAdvertToSavedList(let userId,_):
+            return "savedList/\(userId).json"
+        case .deleteAdvertFromSavedList(let id,let key):
+            return "savedList/\(id)/\(key).json"
+        case .savedList(let userId):
+            return "savedList/\(userId).json"
             
         }
     }
     
     var method: AlamofireMethod {
         switch self {
+        case .addAdvertToSavedList:
+            return .post
+        case .deleteAdvertFromSavedList:
+            return .delete
         default:
             return .get
         }
@@ -57,6 +71,8 @@ extension NetworkPath : TargetType {
     
     var requestType: RequestType {
         switch self {
+        case .addAdvertToSavedList(_,let parameters):
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.init())
         default:
             return .requestPlain
         }
