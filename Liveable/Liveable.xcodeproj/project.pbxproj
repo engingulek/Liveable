@@ -15,7 +15,7 @@
 		7D1C0B652AC09A53000F134C /* LiveableUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B642AC09A53000F134C /* LiveableUITestsLaunchTests.swift */; };
 		7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B712AC09D00000F134C /* TabbarRoot.swift */; };
 		7D1C0B742AC09D99000F134C /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B732AC09D99000F134C /* ExploreView.swift */; };
-		7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B752AC09DBD000F134C /* FavoritesView.swift */; };
+		7D1C0B762AC09DBD000F134C /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B752AC09DBD000F134C /* SavedView.swift */; };
 		7D1C0B782AC09DEA000F134C /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B772AC09DEA000F134C /* TripsView.swift */; };
 		7D1C0B7A2AC09E2D000F134C /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B792AC09E2D000F134C /* InboxView.swift */; };
 		7D1C0B7C2AC09E38000F134C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C0B7B2AC09E38000F134C /* ProfileView.swift */; };
@@ -56,6 +56,8 @@
 		7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0278B2AC1B75500640F61 /* LoginView.swift */; };
 		7DD0278E2AC1CE9500640F61 /* AdvertDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */; };
 		7DD027912AC1CF3400640F61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7DD027902AC1CF3400640F61 /* Kingfisher */; };
+		7DFD04572AD8677100BE96D4 /* SavedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD04562AD8677100BE96D4 /* SavedService.swift */; };
+		7DFD04592AD8681200BE96D4 /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD04582AD8681200BE96D4 /* SavedViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +89,7 @@
 		7D1C0B642AC09A53000F134C /* LiveableUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveableUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7D1C0B712AC09D00000F134C /* TabbarRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarRoot.swift; sourceTree = "<group>"; };
 		7D1C0B732AC09D99000F134C /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
-		7D1C0B752AC09DBD000F134C /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		7D1C0B752AC09DBD000F134C /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		7D1C0B772AC09DEA000F134C /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
 		7D1C0B792AC09E2D000F134C /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
 		7D1C0B7B2AC09E38000F134C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,8 @@
 		7DC5DEFE2AC43AA2005DE7B6 /* ExploreViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModelTests.swift; sourceTree = "<group>"; };
 		7DD0278B2AC1B75500640F61 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertDesign.swift; sourceTree = "<group>"; };
+		7DFD04562AD8677100BE96D4 /* SavedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedService.swift; sourceTree = "<group>"; };
+		7DFD04582AD8681200BE96D4 /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,13 +222,13 @@
 		7D1C0B7D2AC09E48000F134C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7DFD04552AD865C600BE96D4 /* SavedView */,
 				7D6FE6B22ACEEE1B00E47C93 /* SearchResult */,
 				7DC57D6B2ACD950D0052AE6E /* AllReviews */,
 				7DC455FD2AC59456003F0C13 /* SearhView */,
 				7D9FF1FF2AC49B69002D4A0C /* AdvertDetail */,
 				7D335D762AC3518A00150C0D /* Explore */,
 				7D1C0B712AC09D00000F134C /* TabbarRoot.swift */,
-				7D1C0B752AC09DBD000F134C /* FavoritesView.swift */,
 				7D1C0B772AC09DEA000F134C /* TripsView.swift */,
 				7D1C0B792AC09E2D000F134C /* InboxView.swift */,
 				7D1C0B7B2AC09E38000F134C /* ProfileView.swift */,
@@ -337,6 +341,16 @@
 				7DC5DEFE2AC43AA2005DE7B6 /* ExploreViewModelTests.swift */,
 			);
 			path = Explore;
+			sourceTree = "<group>";
+		};
+		7DFD04552AD865C600BE96D4 /* SavedView */ = {
+			isa = PBXGroup;
+			children = (
+				7D1C0B752AC09DBD000F134C /* SavedView.swift */,
+				7DFD04562AD8677100BE96D4 /* SavedService.swift */,
+				7DFD04582AD8681200BE96D4 /* SavedViewModel.swift */,
+			);
+			path = SavedView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,12 +507,14 @@
 				7D335D882AC35F6500150C0D /* ExploreViewModel.swift in Sources */,
 				7DD0278E2AC1CE9500640F61 /* AdvertDesign.swift in Sources */,
 				7D5AEC842ACC81DD0061B5F5 /* UserInfo.swift in Sources */,
+				7DFD04592AD8681200BE96D4 /* SavedViewModel.swift in Sources */,
 				7D335D782AC3519B00150C0D /* Advert.swift in Sources */,
 				7DD0278C2AC1B75500640F61 /* LoginView.swift in Sources */,
 				7D335D7D2AC3524900150C0D /* RequestType.swift in Sources */,
 				7D957A422AD6E616008125FD /* ResultData.swift in Sources */,
-				7D1C0B762AC09DBD000F134C /* FavoritesView.swift in Sources */,
+				7D1C0B762AC09DBD000F134C /* SavedView.swift in Sources */,
 				7D335D7B2AC3521100150C0D /* NetworkPath.swift in Sources */,
+				7DFD04572AD8677100BE96D4 /* SavedService.swift in Sources */,
 				7D1C0B722AC09D00000F134C /* TabbarRoot.swift in Sources */,
 				7DC57D6D2ACD95360052AE6E /* AllReviewView.swift in Sources */,
 				7D1C0B802AC09F18000F134C /* TabbarButton.swift in Sources */,

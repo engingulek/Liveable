@@ -8,7 +8,7 @@
 import SwiftUI
 struct AdvertDesign: View {
     let advert  : Advert
-    let viewModel : ExploreViewModel
+    
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
            
@@ -49,6 +49,6 @@ struct AdvertDesign: View {
 
 struct AdvertDesign_Previews: PreviewProvider {
     static var previews: some View {
-        AdvertDesign(advert: Advert.advertExample,viewModel: ExploreViewModel())
+        AdvertDesign(advert: Advert.advertExample)
     }
 }

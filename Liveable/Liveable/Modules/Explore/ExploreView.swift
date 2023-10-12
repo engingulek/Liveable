@@ -119,7 +119,7 @@ extension ExploreView {
                     
                     ForEach(exploreViewModel.advertList,id:\.id) { advert in
                         
-                        AdvertDesign(advert: advert,viewModel: exploreViewModel)
+                        AdvertDesign(advert: advert)
                             .foregroundColor(.primary)
                             .onTapGesture {
                                 exploreViewModel.changeToAdvertDetailView()
