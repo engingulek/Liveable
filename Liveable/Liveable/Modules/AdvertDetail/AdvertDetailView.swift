@@ -45,6 +45,7 @@ struct AdvertDetailView: View {
             .onAppear{
                 viewModel.getUserInfo(userId: advert.userID)
                 viewModel.fetchAdvertComment(advertId: advert.id)
+                viewModel.fetchSavedList(id: advert.id)
             }
         }.tint(.black)
     }
@@ -81,10 +82,13 @@ extension AdvertDetailView {
 
                    
                     Spacer()
-                    Image(systemName: "heart")
+                    Image(systemName: viewModel.iconSystemImage)
                         .padding()
                         .background(.white)
                         .clipShape(Circle())
+                        .onTapGesture {
+                            viewModel.onTapHeartIcon(advert: advert)
+                        }
                 }.padding()
                     .padding(.vertical,25)
             }

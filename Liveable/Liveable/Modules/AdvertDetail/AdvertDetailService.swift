@@ -16,12 +16,15 @@ struct Welcome: Codable {
 protocol AdvertDetailViewServiceProtocol {
     func fetchUserInfo(userId id :Int,completion:@escaping(Result<UserInfo,Error>)->())
     func fetchAllComment(advertId id : Int,completion:@escaping(Result<Comment?,Error>)->())
+    func fetchSavedList(userId:String,completion:@escaping (Result<AdvertDic,Error>)->())
+    
     func addAdvertToSavedList(advert:Parameters,userId:String,completion: @escaping (Result<Welcome?, Error>) -> ())
+    func deleteAdvertFromSavedList(userId:String,key:String,completion: @escaping (Result<Welcome?, Error>) -> ())
+    
 }
 
 
 final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
-    
     
     let networkManager: NetworkManagerProtocol
     static let shared = AdvertDetailViewService()
@@ -58,9 +61,17 @@ final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
         }
     }
     
-    
-  
-     func addAdvertToSavedList(advert:Parameters,userId:String,completion: @escaping (Result<Welcome?, Error>) -> ()) {
+    func fetchSavedList(userId: String, completion: @escaping (Result<AdvertDic, Error>) -> ()) {
+        networkManager.fetch(target: .savedList(userId), responseClass: AdvertDic.self) { response in
+            switch response {
+            case .success(let dic):
+                completion(.success(dic ?? [:]))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+    }
+    func addAdvertToSavedList(advert:Parameters,userId:String,completion: @escaping (Result<Welcome?, Error>) -> ()) {
          networkManager.fetch(target: .addAdvertToSavedList(userId,advert), responseClass: Welcome.self) { response in
              switch response {
              case .success(let success):
@@ -70,6 +81,22 @@ final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
              }
          }
      }
+    
+    func deleteAdvertFromSavedList(userId: String, key: String,completion: @escaping (Result<Welcome?, Error>) -> ()) {
+        networkManager.fetch(target: .deleteAdvertFromSavedList(userId, key), responseClass: Welcome.self) { response in
+            switch response {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+            
+        }
+    }
+    
+ 
+    
+    
      
     
      

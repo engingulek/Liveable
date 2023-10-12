@@ -30,7 +30,7 @@ final class ExploreService : ExploreServiceProtocol {
     }
     
     func fetchAdverts(completion: @escaping (Result<[Advert]?, Error>) -> ()) {
-        networkManager.fetch(target: .adverts, responseClass: [Advert].self) { response in
+        networkManager.fetch(target: .adverts, responseClass: [Advert]?.self) { response in
             switch response {
             case .success(let list):
                 
@@ -43,7 +43,7 @@ final class ExploreService : ExploreServiceProtocol {
     
     
     func fetchCategory(completion: @escaping (Result<[Category]?, Error>) -> ()) {
-        networkManager.fetch(target: .categories, responseClass: [Category].self) { response in
+        networkManager.fetch(target: .categories, responseClass: [Category]?.self) { response in
             switch response {
             case .success(let list):
                 completion(.success(list ?? []))

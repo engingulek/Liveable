@@ -20,8 +20,7 @@ struct TabbarRoot:View {
                     .tag("Saved")
                 TripsView()
                     .tag("Trips")
-                InboxView()
-                    .tag("Inbox")
+            
                 
                 ProfileView()
                     .tag("Profile")
@@ -41,7 +40,6 @@ extension TabbarRoot {
             TabbarButton(currentTab: $currentTab, title: "Explore", icon: "network")
             TabbarButton(currentTab: $currentTab, title: "Saved", icon: "heart")
             TabbarButton(currentTab: $currentTab, title: "Trips", icon: "location.north")
-            TabbarButton(currentTab: $currentTab, title: "Inbox", icon: "message")
             TabbarButton(currentTab: $currentTab, title: "Profile", icon: "person.crop.circle")
         }
     }

@@ -21,7 +21,7 @@ final class AllReviewService : AllReviewServiceProtocol  {
     }
    
     func fetchAllComment(advertId id : Int,completion: @escaping (Result<Comment?, Error>) -> ()) {
-        networkManager.fetch(target: .advertComment(id), responseClass: Comment.self) { response in
+        networkManager.fetch(target: .advertComment(id), responseClass: Comment?.self) { response in
             switch response {
             case .success(let dic):
                 completion(.success(dic ?? [:]))

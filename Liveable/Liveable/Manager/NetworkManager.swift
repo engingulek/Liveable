@@ -11,6 +11,7 @@ import Alamofire
 enum CustomError : Error{
     case networkError
     case defaultError
+    case nilError
 }
 
 struct NetworkConfig {
@@ -41,12 +42,15 @@ final class NetworkManager : NetworkManagerProtocol {
         
       
        
-        AF.request(url!,method: method,parameters: parameters.0 as? Parameters ,encoding: parameters.1,headers: headers)
+        AF.request(url!,method: method,parameters: parameters.0  ,encoding: parameters.1,headers: headers)
             .response{ response in
+                
+               
                 if let data = response.data {
-                    
+              
                     do {
-                        let result = try JSONDecoder().decode(T.self, from: data)
+                        let result = try JSONDecoder().decode(responseClass, from: data )
+                      
                         completion(.success(result))
                     }catch{
                         print(error.localizedDescription)
@@ -54,7 +58,11 @@ final class NetworkManager : NetworkManagerProtocol {
                             print(statusCode)
                             if statusCode == 404{
                                 completion(.failure(CustomError.networkError))
-                            }else {
+                            }
+                            else if statusCode == 200 {
+                                completion(.failure(CustomError.nilError))
+                            }
+                            else {
                                 completion(.failure(CustomError.defaultError))
                             }
                         }

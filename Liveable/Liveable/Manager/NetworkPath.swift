@@ -19,6 +19,7 @@ enum NetworkPath {
     case searchAdvertByCountry(String)
     case savedList(String)
     case addAdvertToSavedList(String,Parameters)
+    case deleteAdvertFromSavedList(String,String)
     
     
     static let baseUrl:String = ProductConstants.BASE_URL
@@ -49,6 +50,8 @@ extension NetworkPath : TargetType {
             return "advertList.json?orderBy=\"location/country\"&equalTo=\"\(text)\""
         case .addAdvertToSavedList(let userId,_):
             return "savedList/\(userId).json"
+        case .deleteAdvertFromSavedList(let id,let key):
+            return "savedList/\(id)/\(key).json"
         case .savedList(let userId):
             return "savedList/\(userId).json"
             
@@ -59,6 +62,8 @@ extension NetworkPath : TargetType {
         switch self {
         case .addAdvertToSavedList:
             return .post
+        case .deleteAdvertFromSavedList:
+            return .delete
         default:
             return .get
         }
