@@ -38,6 +38,8 @@ struct SavedView: View {
             }else{
                 ProgressView()
             }
+        }.onAppear{
+           
         }
      
     }
@@ -53,7 +55,18 @@ extension SavedView {
                         .font(.title2)
                         .fontWeight(.semibold)
                     ForEach(viewModel.savedList.keys.sorted(by: <),id: \.self) { index  in
-                        AdvertDesign(advert: viewModel.savedList[index] ?? Advert.advertExample)
+                        VStack(alignment:.trailing) {
+                            
+                            AdvertDesign(advert: viewModel.savedList[index] ?? Advert.advertExample)
+                            Button("Delete") {
+                                viewModel.onTapDeleteButton(advert: viewModel.savedList[index] ?? Advert.advertExample )
+                            }.foregroundColor(.pink)
+                                .padding(.horizontal)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            Divider()
+                        }
+                       
                             .onTapGesture {
                                 viewModel.changeToDetailView()
                             }.fullScreenCover(isPresented: $viewModel.toDetailView) {

@@ -14,21 +14,15 @@ protocol SavedViewModelProtocol : ObservableObject {
     var isMessage : (message:String,icon:String) {get}
     var toDetailView : Bool {get}
     
-    func changeIsLoadingPage()
+    func changeIsLoadingPage(isLoad:Bool)
     func changeIsEmptyData()
     func changeIsError()
     func changeIsMessage(message:String,icon:String)
     func changeToDetailView()
-    
-    
 }
 
 
 final class SavedViewModel : SavedViewModelProtocol {
-    
-    
-    
-    
     @Published var isLoadingPage: Bool = false
     @Published var isEmptyData: Bool = false
     @Published var isError: Bool = false
@@ -48,20 +42,21 @@ final class SavedViewModel : SavedViewModelProtocol {
         serviceManager.fetchSavedList(userId: "userId") { result  in
             switch result {
             case .success(let dicList):
-                self.changeIsLoadingPage()
+                self.changeIsLoadingPage(isLoad: true)
                 
                 guard let list = dicList else {return}
-                if list.isEmpty {
+                DispatchQueue.main.async {
+                    self.savedList = list
+                }
+                if list.isEmpty  {
                     self.changeIsEmptyData()
                     self.changeIsMessage(message: "Ad not found", icon: "no-data")
                 }
                 
-                DispatchQueue.main.async {
-                    self.savedList = list
-                }
+               
                 
             case .failure(let error):
-                self.changeIsLoadingPage()
+                self.changeIsLoadingPage(isLoad: true)
                 self.changeIsError()
                 if error as! CustomError == CustomError.networkError {
                     self.changeIsMessage(message: "Network Error", icon: "error")
@@ -69,8 +64,26 @@ final class SavedViewModel : SavedViewModelProtocol {
                 }else{
                     self.changeIsMessage(message: "something went wrong", icon: "error")
                 }
-                
-                
+            }
+        }
+    }
+    
+    
+    func onTapDeleteButton(advert:Advert) {
+        let filterSavedList = savedList.filter { $0.value.id == advert.id }
+        if let key = filterSavedList.keys.first {
+            self.deleteAdvertFromSaved(key: key)
+        }
+        
+    }
+    
+    private func deleteAdvertFromSaved(key:String){
+        serviceManager.deleteAdvertFromSavedList(userId: "userId", key: key) { result in
+            switch result {
+            case .success:
+                self.fetchSavedList()
+            case .failure:
+                self.fetchSavedList()
             }
         }
     }
@@ -82,14 +95,11 @@ final class SavedViewModel : SavedViewModelProtocol {
 
 
 extension SavedViewModel {
+
     
-    func didLoad() {
-        fetchSavedList()
-    }
-    
-    func changeIsLoadingPage() {
+    func changeIsLoadingPage(isLoad:Bool) {
         DispatchQueue.main.async {
-            self.isLoadingPage = !self.isLoadingPage
+            self.isLoadingPage = isLoad
         }
     }
     

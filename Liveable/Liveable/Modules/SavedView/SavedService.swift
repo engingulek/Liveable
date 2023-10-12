@@ -9,10 +9,13 @@ import Foundation
 
 protocol SavedServiceProtocol {
     func fetchSavedList(userId:String,completion:@escaping (Result<AdvertDic?,Error>)->())
+    func deleteAdvertFromSavedList(userId:String,key:String,completion: @escaping (Result<Welcome?, Error>) -> ())
 }
 
 
 final class SavedService  :SavedServiceProtocol {
+    
+    
     
     let networkManager: NetworkManagerProtocol
     static let shared = SavedService()
@@ -29,6 +32,18 @@ final class SavedService  :SavedServiceProtocol {
             case .failure(let failure):
                 completion(.failure(failure))
             }
+        }
+    }
+    
+    func deleteAdvertFromSavedList(userId: String, key: String,completion: @escaping (Result<Welcome?, Error>) -> ()) {
+        networkManager.fetch(target: .deleteAdvertFromSavedList(userId, key), responseClass: Welcome.self) { response in
+            switch response {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+            
         }
     }
     
