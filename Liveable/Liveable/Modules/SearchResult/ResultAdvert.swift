@@ -12,45 +12,49 @@ struct ResultAdvert: View {
     let guestItem:[GuestItem]
     @StateObject var viewModel = SearchResultViewModel()
     var body: some View {
-        HStack {
-            KFImage(URL(string: advert.baseImageURL))
-                .resizable()
-                .cornerRadius(10)
-                .frame(width: 100,height: 120)
-            VStack(alignment:.leading,spacing: 5) {
-                Text(advert.title)
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                Label("\(advert.location.city),\(advert.location.country)", systemImage: "mappin.circle")
-                    .foregroundColor(.gray)
-                    .font(.caption2)
-                
-                HStack {
-                    VStack(alignment:.leading) {
-                        Text("\(advert.roomCount.guest) guests")
-                        Text("\(advert.roomCount.bedroom) bedrooms")
-                    }
-                    VStack(alignment:.leading) {
-                        Text("\(advert.roomCount.bed) beds")
-                        Text("\(advert.roomCount.bath) baths")
-                    }
-                }.font(.caption2)
-                
-                Text(viewModel.calculatorPrice(advert: advert, guestItms: guestItem).total)
-                Text(viewModel.calculatorPrice(advert: advert, guestItms: guestItem).desc)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .fontWeight(.semibold)
+        VStack {
+            HStack {
+                KFImage(URL(string: advert.baseImageURL))
+                    .resizable()
+                    .cornerRadius(10)
+                    .frame(width: 100,height: 120)
+                VStack(alignment:.leading,spacing: 5) {
+                    Text(advert.title)
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                    Label("\(advert.location.city),\(advert.location.country)", systemImage: "mappin.circle")
+                        .foregroundColor(.gray)
+                        .font(.caption2)
+                    
+                    HStack {
+                        VStack(alignment:.leading) {
+                            Text("\(advert.roomCount.guest) guests")
+                            Text("\(advert.roomCount.bedroom) bedrooms")
+                        }
+                        VStack(alignment:.leading) {
+                            Text("\(advert.roomCount.bed) beds")
+                            Text("\(advert.roomCount.bath) baths")
+                        }
+                    }.font(.caption2)
+                    
+                    Text("$\(viewModel.calculatorPrice(advert: advert, guestItms: guestItem).total)")
+                    Text(viewModel.calculatorPrice(advert: advert, guestItms: guestItem).desc)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .fontWeight(.semibold)
+                   
+                }
+                Spacer()
             }
-            Spacer()
-        }
-        
-        .padding(10)
-        .background(Color.white)
-        .cornerRadius(10)
-        .padding()
-        .onAppear{
-            //viewModel.calculatorPrice(guestItems: guest)
+            
+            .padding(10)
+            .background(Color.white)
+            .cornerRadius(10)
+            Button("Reserve") {
+                viewModel.addAdvertToTripList(advert: advert, guestList: guestItem)
+            }.foregroundColor(.pink)
+                .fontWeight(.semibold)
+                .font(.title3)
         }
     }
 }
