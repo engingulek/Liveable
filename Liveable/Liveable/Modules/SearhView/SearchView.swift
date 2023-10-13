@@ -128,7 +128,7 @@ extension SearchView {
                             .font(.title3)
                     }
                 }else{
-                    ProfileView().padding(50)
+                    //ProfileView().padding(50)
                 }
                
             }.padding()

@@ -50,11 +50,7 @@ struct ResultAdvert: View {
             .padding(10)
             .background(Color.white)
             .cornerRadius(10)
-            Button("Reserve") {
-                viewModel.addAdvertToTripList(advert: advert, guestList: guestItem)
-            }.foregroundColor(.pink)
-                .fontWeight(.semibold)
-                .font(.title3)
+           
         }
     }
 }

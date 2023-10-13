@@ -20,7 +20,8 @@ enum NetworkPath {
     case savedList(String)
     case addAdvertToSavedList(String,Parameters)
     case deleteAdvertFromSavedList(String,String)
-    case addTripList(String,Parameters)
+   
+
     
     
     static let baseUrl:String = ProductConstants.BASE_URL
@@ -55,18 +56,13 @@ extension NetworkPath : TargetType {
             return "savedList/\(id)/\(key).json"
         case .savedList(let userId):
             return "savedList/\(userId).json"
-        
-            
-        case .addTripList(let userId, _):
-            return "tripList/\(userId).json"
+
         }
     }
     
     var method: AlamofireMethod {
         switch self {
         case .addAdvertToSavedList:
-            return .post
-        case .addTripList:
             return .post
         case .deleteAdvertFromSavedList:
             return .delete
@@ -78,8 +74,6 @@ extension NetworkPath : TargetType {
     var requestType: RequestType {
         switch self {
         case .addAdvertToSavedList(_,let parameters):
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.init())
-        case .addTripList(_, let parameters):
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.init())
         default:
             return .requestPlain

@@ -91,44 +91,7 @@ final class AdvertDetailViewModel : AdvertDetailViewModelProtocol {
         }
     }
     
-    func addAdvertToTripList(advert:Advert,guestList:[GuestItem]) {
-        if guestList.lazy.compactMap({$0.piece}).reduce(0,+) != 0{
-           
-           
-            
-        // Will See Later
-            let trip : Parameters = [
-                
-                "advert" :advert.dictionary,
-                "guest" : [
-                [
-                    "title" : guestList[0].title,
-                    "piece"  : guestList[0].piece
-                ] as [String : Any],
-                [
-                    "title" : guestList[1].title,
-                    "piece"  : guestList[1].piece
-                ] as [String : Any],
-                [
-                    "title" : guestList[2].title,
-                    "piece"  : guestList[2].piece
-                ] as [String : Any],
-                
-            ]]
-            serviceManager.addAdvertToTripList(trip: trip, userId: "userId") { result in
-                switch result {
-                case .success:
-                    print("advmmmmmm")
-                    self.changeToEnterGuestInfo()
-                case .failure(let failure):
-                    print("Add Advert Error to tripList \(failure.localizedDescription)")
-                }
-            }
-        }else{
-            
-        }
-        
-    }
+
     
     
     

@@ -37,7 +37,7 @@ struct AdvertDetailView: View {
                     }
                    
                 }
-                reserver
+                price
                 Spacer()
             }
             .navigationBarBackButtonHidden(true)
@@ -191,84 +191,20 @@ extension AdvertDetailView {
         
     }
     
-    private var reserver : some View {
+    private var price : some View {
         HStack {
             Text("$\(advert.price.adult) night")
                 .font(.title2)
                 .fontWeight(.semibold)
-            Spacer()
-            Button("Rezerve") {
-                viewModel.changeToEnterGuestInfo()
-            }
-            .padding()
-            .font(.callout)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-            .frame(width: UIScreen.main.bounds.width / 4)
-            .background(Color.pink )
-            .cornerRadius(10)
-            
-            
+            Spacer() 
         }
         .padding(.top,20)
         .padding(.horizontal)
         .background(.white)
-        .sheet(isPresented: $viewModel.toEnterGuestInfo) {
-            openGuests
-            .presentationDetents([.medium])
-        }
     }
 }
 
-extension AdvertDetailView {
-    private var openGuests : some View {
-        VStack(alignment: .center,spacing: 10) {
-            Image(systemName: "arrow.down.to.line")
-                .imageScale(.large)
-                .foregroundColor(.black)
-            Text("Who is coming")
-                .font(.title)
-            ForEach(viewModel.guestList,id: \.id) { item in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(item.title)
-                            .foregroundColor(.black)
-                        Text(item.subtitle)
-                            .foregroundColor(.gray)
-                    }
-                    Spacer()
-                    
-                    Button {
-                        viewModel.decreaseGuest(guestId: item.id)
-                    } label: {
-                        Image(systemName: "minus.circle")
-                            //.foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).decrase)"])
-                            .font(.title2)
-                    }.disabled(viewModel.decraseButtonDisabled(guestId: item.id))
-                    
-                    Text("\(item.piece)")
-                        .font(.title3)
-                        .frame(width: 30)
-                    Button {
-                        viewModel.addGuest(guestId: item.id)
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).add)"])
-                            .font(.title2)
-                    }
-                }
-            }
-            Button("Reserve") {
-                viewModel.addAdvertToTripList(advert: advert,guestList: viewModel.guestList)
-            }.foregroundColor(.pink)
-                .padding(.vertical)
-                .font(.title2)
-                .fontWeight(.semibold)
-        }.padding(20)
-            .background(Color.white)
-            .cornerRadius(20).padding()
-    }
-}
+
 
 struct AdvertDetailView_Previews: PreviewProvider {
     static var previews: some View {
