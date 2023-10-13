@@ -20,6 +20,8 @@ enum NetworkPath {
     case savedList(String)
     case addAdvertToSavedList(String,Parameters)
     case deleteAdvertFromSavedList(String,String)
+   
+
     
     
     static let baseUrl:String = ProductConstants.BASE_URL
@@ -54,7 +56,7 @@ extension NetworkPath : TargetType {
             return "savedList/\(id)/\(key).json"
         case .savedList(let userId):
             return "savedList/\(userId).json"
-            
+
         }
     }
     

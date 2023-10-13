@@ -18,12 +18,7 @@ struct TabbarRoot:View {
                     .tag("Explore")
                 SavedView()
                     .tag("Saved")
-                TripsView()
-                    .tag("Trips")
-            
-                
-                ProfileView()
-                    .tag("Profile")
+              
             }.overlay(alignment: .bottom) {
                 bottomTabbarStack
             }.ignoresSafeArea(.keyboard, edges: .bottom)
@@ -39,8 +34,8 @@ extension TabbarRoot {
         HStack(spacing:5) {
             TabbarButton(currentTab: $currentTab, title: "Explore", icon: "network")
             TabbarButton(currentTab: $currentTab, title: "Saved", icon: "heart")
-            TabbarButton(currentTab: $currentTab, title: "Trips", icon: "location.north")
-            TabbarButton(currentTab: $currentTab, title: "Profile", icon: "person.crop.circle")
+           
+          
         }
     }
 }

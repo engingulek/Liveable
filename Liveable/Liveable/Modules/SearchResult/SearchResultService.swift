@@ -6,13 +6,17 @@
 //
 
 import Foundation
-
+import Alamofire
 protocol SearchResultServiceProtocol {
     func searchByCountry(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
     func searchByCity(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
+    
+  
 }
 
 final class SearchResultService :  SearchResultServiceProtocol {
+  
+    
     
     let networkManager: NetworkManagerProtocol
     static let shared =  SearchResultService()
@@ -43,6 +47,9 @@ final class SearchResultService :  SearchResultServiceProtocol {
             }
         }
     }
+    
+    
+  
     
     
 }

@@ -37,7 +37,7 @@ struct AdvertDetailView: View {
                     }
                    
                 }
-                reserver
+                price
                 Spacer()
             }
             .navigationBarBackButtonHidden(true)
@@ -191,30 +191,20 @@ extension AdvertDetailView {
         
     }
     
-    private var reserver : some View {
+    private var price : some View {
         HStack {
             Text("$\(advert.price.adult) night")
                 .font(.title2)
                 .fontWeight(.semibold)
-            Spacer()
-            Button("Rezerve") {
-                
-            }
-            .padding()
-            .font(.callout)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-            .frame(width: UIScreen.main.bounds.width / 4)
-            .background(Color.pink )
-            .cornerRadius(10)
-            
-            
+            Spacer() 
         }
         .padding(.top,20)
         .padding(.horizontal)
         .background(.white)
     }
 }
+
+
 
 struct AdvertDetailView_Previews: PreviewProvider {
     static var previews: some View {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 protocol SearchResultViewModelProtocol : ObservableObject {
     var isPageLoaded: Bool { get }
     var isEmptyData :  Bool {get}
@@ -105,8 +106,6 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
         (babyPiece * advert.price.baby)
         return (total:"\(totalPrice)",desc:desc)
     }
-    
-   
 }
 
 

@@ -8,7 +8,7 @@
 import Foundation
 
 
- struct GuestItem {
+struct GuestItem  : Codable{
     var id : Int
     var title : String
     var subtitle : String

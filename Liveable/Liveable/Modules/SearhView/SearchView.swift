@@ -128,7 +128,7 @@ extension SearchView {
                             .font(.title3)
                     }
                 }else{
-                    ProfileView().padding(50)
+                    //ProfileView().padding(50)
                 }
                
             }.padding()
@@ -192,16 +192,14 @@ extension SearchView {
             }
         }.padding(20)
             .background(Color.white)
-            .cornerRadius(20)
-        
-            .padding()
+            .cornerRadius(20).padding()
     }
     
     private var closeGuest : some View {
         HStack {
             Text("Guest")
             Spacer()
-            Text("\(viewModel.totalGuest)")
+            //Text("\(viewModel.totalGuest)")
         }
         .padding()
         .background(Color.white)
