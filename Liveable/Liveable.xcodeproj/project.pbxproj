@@ -182,6 +182,7 @@
 		7D1C0B462AC09A52000F134C /* Liveable */ = {
 			isa = PBXGroup;
 			children = (
+				7DCD75672AD971A600AE530B /* Base */,
 				7D957A452AD715FF008125FD /* Extension */,
 				7D335D792AC351D900150C0D /* Manager */,
 				7D1C0B7E2AC09F04000F134C /* Companents */,
@@ -341,6 +342,13 @@
 				7DC5DEFE2AC43AA2005DE7B6 /* ExploreViewModelTests.swift */,
 			);
 			path = Explore;
+			sourceTree = "<group>";
+		};
+		7DCD75672AD971A600AE530B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		7DFD04552AD865C600BE96D4 /* SavedView */ = {

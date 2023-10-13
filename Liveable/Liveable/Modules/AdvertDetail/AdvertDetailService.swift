@@ -93,18 +93,4 @@ final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
             
         }
     }
-    
- 
-    
-    
-     
-    
-     
-     
-    
-     
-
-     
-    
-    
 }

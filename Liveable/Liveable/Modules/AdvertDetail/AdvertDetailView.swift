@@ -198,7 +198,7 @@ extension AdvertDetailView {
                 .fontWeight(.semibold)
             Spacer()
             Button("Rezerve") {
-                
+                viewModel.changeToEnterGuestInfo()
             }
             .padding()
             .font(.callout)
@@ -213,6 +213,60 @@ extension AdvertDetailView {
         .padding(.top,20)
         .padding(.horizontal)
         .background(.white)
+        .sheet(isPresented: $viewModel.toEnterGuestInfo) {
+            openGuests
+            .presentationDetents([.medium])
+        }
+    }
+}
+
+extension AdvertDetailView {
+    private var openGuests : some View {
+        VStack(alignment: .center,spacing: 10) {
+            Image(systemName: "arrow.down.to.line")
+                .imageScale(.large)
+                .foregroundColor(.black)
+            Text("Who is coming")
+                .font(.title)
+            ForEach(viewModel.guestList,id: \.id) { item in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(item.title)
+                            .foregroundColor(.black)
+                        Text(item.subtitle)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                    
+                    Button {
+                        viewModel.decreaseGuest(guestId: item.id)
+                    } label: {
+                        Image(systemName: "minus.circle")
+                            //.foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).decrase)"])
+                            .font(.title2)
+                    }.disabled(viewModel.decraseButtonDisabled(guestId: item.id))
+                    
+                    Text("\(item.piece)")
+                        .font(.title3)
+                        .frame(width: 30)
+                    Button {
+                        viewModel.addGuest(guestId: item.id)
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).add)"])
+                            .font(.title2)
+                    }
+                }
+            }
+            Button("Reserve") {
+                
+            }.foregroundColor(.pink)
+                .padding(.vertical)
+                .font(.title2)
+                .fontWeight(.semibold)
+        }.padding(20)
+            .background(Color.white)
+            .cornerRadius(20).padding()
     }
 }
 
