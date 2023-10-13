@@ -21,11 +21,13 @@ protocol AdvertDetailViewServiceProtocol {
     func addAdvertToSavedList(advert:Parameters,userId:String,completion: @escaping (Result<Welcome?, Error>) -> ())
     func deleteAdvertFromSavedList(userId:String,key:String,completion: @escaping (Result<Welcome?, Error>) -> ())
     
+    func addAdvertToTripList(trip:Parameters,userId:String,completion:@escaping(Result<Welcome?,Error>)->())
+    
 }
 
 
 final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
-    
+  
     let networkManager: NetworkManagerProtocol
     static let shared = AdvertDetailViewService()
     
@@ -93,4 +95,23 @@ final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
             
         }
     }
+    func addAdvertToTripList(trip: Alamofire.Parameters, userId: String,
+                             completion: @escaping (Result<Welcome?, Error>) -> ()) {
+        
+        networkManager.fetch(target: .addTripList("userId", trip), responseClass: Welcome.self) { response in
+            switch response {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+        
+    }
+    
+  
+    
+    
+    
+    
 }

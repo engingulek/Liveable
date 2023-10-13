@@ -259,7 +259,7 @@ extension AdvertDetailView {
                 }
             }
             Button("Reserve") {
-                
+                viewModel.addAdvertToTripList(advert: advert,guestList: viewModel.guestList)
             }.foregroundColor(.pink)
                 .padding(.vertical)
                 .font(.title2)
