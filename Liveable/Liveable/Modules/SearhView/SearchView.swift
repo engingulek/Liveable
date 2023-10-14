@@ -6,6 +6,15 @@
 //
 
 import SwiftUI
+import AlertMessage
+
+enum SearchViewIcon : String {
+    case multiply = "multiply"
+    case magnifyingglass = "magnifyingglass"
+    case minusCircle = "minus.circle"
+    case plusCircle = "plus.circle"
+    case mappinCircleFill = "mappin.circle.fill"
+}
 
 struct SearchView: View {
     @Environment(\.dismiss) var dismiss
@@ -20,7 +29,7 @@ struct SearchView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "multiply")
+                    Image(systemName: SearchViewIcon.multiply.rawValue)
                         .font(.title3)
                         .padding()
                         .background(Color.white)
@@ -33,24 +42,19 @@ struct SearchView: View {
             if viewModel.searhAction && !viewModel.isExitSearchList {
                 VStack {
                     header
-                   
                     searchViewList
-                    
                     Spacer()
                 }   .padding()
                     .background(Color.white)
                     .cornerRadius(25)
                     .padding()
             }else {
-                if viewModel.placeStatus {
+                if viewModel.viewStatus {
                     openPlace
+                    closeGuest
                 }else{
                     closePlace
-                }
-                if viewModel.guestStatus {
                     openGuests
-                }else{
-                    closeGuest
                 }
                 
                 Button {
@@ -67,6 +71,9 @@ struct SearchView: View {
                     
                 }.fullScreenCover(isPresented: $viewModel.isToSearchResultView) {
                     SearchResultView(searchText: viewModel.searchText, guest: viewModel.guestList)
+                }.message(isPresenting: $viewModel.isGuestEmptyError) {
+                    AlertMessage(text: viewModel.isGuestEmptyErrorMessage.0,
+                                 desc: viewModel.isGuestEmptyErrorMessage.1)
                 }
             }
               
@@ -90,7 +97,7 @@ extension SearchView {
     //Search
     private var search: some View {
         HStack(spacing:20) {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: SearchViewIcon.magnifyingglass.rawValue)
                 .font(.title2)
             VStack(alignment:.leading){
                 TextField("Search for City",text:$viewModel.searchText)
@@ -119,7 +126,9 @@ extension SearchView {
                     if !viewModel.isMapCountryListError {
                         HStack(spacing:30) {
                             ForEach(viewModel.mapCountryList,id:\.id) { item in
-                                PlaceTitle(placeTab: $currentTab, id: item.id, title: item.title, image: item.imageURL,viewModel: viewModel)
+                                PlaceTitle(placeTab: $currentTab, id: item.id, title:
+                                            item.title, image: item.imageURL,
+                                           viewModel: viewModel)
                             }
                         }
                     }else{
@@ -127,10 +136,7 @@ extension SearchView {
                             .fontWeight(.semibold)
                             .font(.title3)
                     }
-                }else{
-                    //ProfileView().padding(50)
                 }
-               
             }.padding()
         }
         .padding()
@@ -143,7 +149,7 @@ extension SearchView {
         HStack {
             Text("Place")
             Spacer()
-            Text(viewModel.searchText)
+            Text(viewModel.searchText.isEmpty ? viewModel.mapCountryList[0].title : viewModel.searchText)
         }
         .padding()
         .background(Color.white)
@@ -151,7 +157,7 @@ extension SearchView {
         .padding()
         .onTapGesture {
             withAnimation(.linear) {
-                viewModel.placeAction()
+                viewModel.onTapPlaceView()
             }
         }
     }
@@ -173,7 +179,7 @@ extension SearchView {
                     Button {
                         viewModel.decreaseGuest(guestId: item.id)
                     } label: {
-                        Image(systemName: "minus.circle")
+                        Image(systemName: SearchViewIcon.minusCircle.rawValue)
                             .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).decrase)"])
                             .font(.title2)
                     }.disabled(viewModel.decraseButtonDisabled(guestId: item.id))
@@ -184,7 +190,7 @@ extension SearchView {
                     Button {
                         viewModel.addGuest(guestId: item.id)
                     } label: {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: SearchViewIcon.plusCircle.rawValue)
                             .foregroundColor(Color["\(viewModel.addAndDecraseButtonColot(piece: item.piece).add)"])
                             .font(.title2)
                     }
@@ -199,7 +205,7 @@ extension SearchView {
         HStack {
             Text("Guest")
             Spacer()
-            //Text("\(viewModel.totalGuest)")
+            Text("\(viewModel.totalGuest)")
         }
         .padding()
         .background(Color.white)
@@ -207,7 +213,7 @@ extension SearchView {
         .padding()
         .onTapGesture {
             withAnimation(.linear) {
-                viewModel.guestAction()
+                viewModel.onTapGuestView()
             }
         }
     }
@@ -216,7 +222,7 @@ extension SearchView {
         ScrollView {
             ForEach(viewModel.cityList,id:\.id) { city in
                 HStack {
-                    Image(systemName: "mappin.circle.fill")
+                    Image(systemName: SearchViewIcon.mappinCircleFill.rawValue)
                         .resizable()
                         .frame(width: 20, height: 20)
                         .padding(10)
@@ -241,7 +247,6 @@ struct SearchView_Previews: PreviewProvider {
         NavigationView {
             SearchView()
         }
-        
     }
 }
 

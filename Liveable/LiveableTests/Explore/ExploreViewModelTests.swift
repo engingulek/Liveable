@@ -1,9 +1,3 @@
-//
-//  ExploreViewModelTests.swift
-//  LiveableTests
-//
-//  Created by engin gülek on 27.09.2023.
-//
 
 import XCTest
 @testable import Liveable
@@ -27,7 +21,7 @@ final class ExploreViewModelTests: XCTestCase {
     
     func test_fetchAdverts_ReturnSuccess_isPageLoadedTrue() {
        
-        let advert = Advert(baseImageURL: "", category: 1, decription: "", id: 0, images: [""], location: Location(city: "", country: "", latitude: "", longitude: ""), price: 0, rating: 1.0, roomCount: RoomCount(bath: 0, bed: 0, bedroom: 0, guest: 0), title: "", userID: 0)
+        let advert = Advert(baseImageURL: "", category: 1, decription: "", id: 0, images: [""], location: Location(city: "", country: "", latitude: "", longitude: ""), price: Price(adult: 1, kid: 0, baby: 0), rating: 1.0, roomCount: RoomCount(bath: 0, bed: 0, bedroom: 0, guest: 0), title: "", userID: 0)
         serviceManager.mockFetchAdvert = .success([advert])
         exploreViewModel.fetchAdvert()
         

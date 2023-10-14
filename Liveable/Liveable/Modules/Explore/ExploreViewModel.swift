@@ -16,11 +16,6 @@ protocol ExploreViewModelProtocol : ObservableObject {
     var defaultMessage : (message:String,icon:String) {get}
     var isToAdvertDetailView : Bool {get}
     var isToSearchView : Bool {get}
-   
-   
-   
-
-  
     
     func changeIsPageLoaded(isLoad:Bool)
     func changeIsEmpty()
@@ -36,12 +31,6 @@ protocol ExploreViewModelProtocol : ObservableObject {
 
 
 final class ExploreViewModel : ExploreViewModelProtocol  {
- 
-    
-   
-    
-    
-    
     
     @Published var errorMessage: (message: String, icon: String) = ("","")
     @Published var defaultMessage: (message: String, icon: String)  = ("","")
@@ -49,25 +38,25 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
     @Published var isPageLoaded: Bool = false
     @Published var isCategoryLoaded: Bool  = false
     @Published var isError: Bool = false
-  
+    
     @Published var categoryTab: Int = 0
     private let serviceManger : ExploreServiceProtocol
     @Published var advertList : [Advert] = []
     @Published var categoryList : [Category] = []
     @Published var searchText : String  = ""
     @Published var toSearh: Bool = false
-   @Published var isToAdvertDetailView: Bool = false
-   @Published var isToSearchView: Bool = false
-
+    @Published var isToAdvertDetailView: Bool = false
+    @Published var isToSearchView: Bool = false
+    
     init(serviceManger: ExploreServiceProtocol = ExploreService.shared) {
         self.serviceManger = serviceManger
         fetchAdvert()
         fetchCategory()
-       
+        
     }
- 
+    
     func fetchAdvert() {
-       serviceManger.fetchAdverts { result in
+        serviceManger.fetchAdverts { result in
             switch result {
             case .success(let list):
                 self.changeIsPageLoaded(isLoad: true)
@@ -84,14 +73,13 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
                     self.changeErrorMessage(message: "something went wrong", icon: "error")
                 }
             }
-          
+            
         }
     }
     
-   
+    
     
     func fetchCategory(){
-        
         serviceManger.fetchCategory { result in
             switch result {
             case .success(let list):
@@ -102,7 +90,6 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
                 if failure.localizedDescription != "200" {
                     self.categoryList =  []
                 }
-               
             }
             self.changeIsCategoryLoaded()
         }
@@ -119,16 +106,15 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
                 case .success(let filterList):
                     self.changeIsPageLoaded(isLoad: true)
                     
-                        guard let list = filterList else {return}
-                        if list.isEmpty {
-                            self.changeIsEmpty()
-                            self.changeDefaultMessage(message: "Ad not found", icon: "no-data")
-                        }
+                    guard let list = filterList else {return}
+                    if list.isEmpty {
+                        self.changeIsEmpty()
+                        self.changeDefaultMessage(message: "Ad not found", icon: "no-data")
+                    }
                     
                     DispatchQueue.main.async {
                         self.advertList = list
                     }
-                  
                     
                 case .failure(let failure):
                     if failure.localizedDescription != "200" {
@@ -138,23 +124,21 @@ final class ExploreViewModel : ExploreViewModelProtocol  {
             }
         }
     }
-    
-  
-
-    
 }
 
 
 
 extension ExploreViewModel {
     func changeIsPageLoaded(isLoad:Bool) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isPageLoaded = isLoad
         }
     }
     
     func changeIsCategoryLoaded() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.isCategoryLoaded = !self.isCategoryLoaded
         }
     }
@@ -166,39 +150,39 @@ extension ExploreViewModel {
         }
     }
     func changeIsError(){
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.isError = !self.isError
         }
     }
     func changeErrorMessage(message:String,icon:String){
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.errorMessage = (message:message,icon:icon)
         }
     }
     
     func changeDefaultMessage(message: String, icon: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.defaultMessage = (message:message,icon:icon)
         }
     }
     
     func changeToAdvertDetailView() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.isToAdvertDetailView = !self.isToAdvertDetailView
         }
     }
     
     
     func changeisToSearchView() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
             self.isToSearchView = true
         }
         
     }
-    
-   
-    
-    
-  
     
 }

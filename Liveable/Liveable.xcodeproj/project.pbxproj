@@ -37,6 +37,9 @@
 		7D6FE6BA2ACEFE9500E47C93 /* SearchResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6FE6B92ACEFE9500E47C93 /* SearchResultService.swift */; };
 		7D6FE6BE2ACF060600E47C93 /* ResultAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6FE6BD2ACF060600E47C93 /* ResultAdvert.swift */; };
 		7D7951B92AC5AFD2008A1E6F /* PlaceTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7951B82AC5AFD2008A1E6F /* PlaceTitle.swift */; };
+		7D88F5C02ADAFD7500232EED /* AlertMessage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D88F5BF2ADAFD7500232EED /* AlertMessage */; };
+		7D88F5C32ADB07CE00232EED /* MockSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88F5C22ADB07CE00232EED /* MockSearchService.swift */; };
+		7D88F5C52ADB097A00232EED /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88F5C42ADB097A00232EED /* SearchViewModelTests.swift */; };
 		7D8DE10A2AC2F025009C4BFA /* CategoryTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8DE1092AC2F025009C4BFA /* CategoryTitle.swift */; };
 		7D957A422AD6E616008125FD /* ResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D957A412AD6E616008125FD /* ResultData.swift */; };
 		7D957A442AD70E6F008125FD /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D957A432AD70E6F008125FD /* Codable+Extension.swift */; };
@@ -106,6 +109,8 @@
 		7D6FE6B92ACEFE9500E47C93 /* SearchResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultService.swift; sourceTree = "<group>"; };
 		7D6FE6BD2ACF060600E47C93 /* ResultAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAdvert.swift; sourceTree = "<group>"; };
 		7D7951B82AC5AFD2008A1E6F /* PlaceTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTitle.swift; sourceTree = "<group>"; };
+		7D88F5C22ADB07CE00232EED /* MockSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchService.swift; sourceTree = "<group>"; };
+		7D88F5C42ADB097A00232EED /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		7D8DE1092AC2F025009C4BFA /* CategoryTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTitle.swift; sourceTree = "<group>"; };
 		7D957A412AD6E616008125FD /* ResultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultData.swift; sourceTree = "<group>"; };
 		7D957A432AD70E6F008125FD /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
@@ -129,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D88F5C02ADAFD7500232EED /* AlertMessage in Frameworks */,
 				7DD027912AC1CF3400640F61 /* Kingfisher in Frameworks */,
 				7D335D802AC3527D00150C0D /* Alamofire in Frameworks */,
 			);
@@ -174,7 +180,6 @@
 		7D1C0B462AC09A52000F134C /* Liveable */ = {
 			isa = PBXGroup;
 			children = (
-				7DCD75672AD971A600AE530B /* Base */,
 				7D957A452AD715FF008125FD /* Extension */,
 				7D335D792AC351D900150C0D /* Manager */,
 				7D1C0B7E2AC09F04000F134C /* Companents */,
@@ -197,6 +202,7 @@
 		7D1C0B572AC09A53000F134C /* LiveableTests */ = {
 			isa = PBXGroup;
 			children = (
+				7D88F5C12ADB076B00232EED /* SearhView */,
 				7DC5DEFB2AC437BB005DE7B6 /* Explore */,
 				7D1C0B582AC09A53000F134C /* LiveableTests.swift */,
 			);
@@ -216,12 +222,12 @@
 			isa = PBXGroup;
 			children = (
 				7DCD756A2AD9A10900AE530B /* Tabbar */,
+				7D335D762AC3518A00150C0D /* Explore */,
+				7DC455FD2AC59456003F0C13 /* SearhView */,
 				7DFD04552AD865C600BE96D4 /* SavedView */,
 				7D6FE6B22ACEEE1B00E47C93 /* SearchResult */,
 				7DC57D6B2ACD950D0052AE6E /* AllReviews */,
-				7DC455FD2AC59456003F0C13 /* SearhView */,
 				7D9FF1FF2AC49B69002D4A0C /* AdvertDetail */,
-				7D335D762AC3518A00150C0D /* Explore */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -282,6 +288,15 @@
 			path = SearchResult;
 			sourceTree = "<group>";
 		};
+		7D88F5C12ADB076B00232EED /* SearhView */ = {
+			isa = PBXGroup;
+			children = (
+				7D88F5C22ADB07CE00232EED /* MockSearchService.swift */,
+				7D88F5C42ADB097A00232EED /* SearchViewModelTests.swift */,
+			);
+			path = SearhView;
+			sourceTree = "<group>";
+		};
 		7D957A452AD715FF008125FD /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,13 +347,6 @@
 			path = Explore;
 			sourceTree = "<group>";
 		};
-		7DCD75672AD971A600AE530B /* Base */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		7DCD756A2AD9A10900AE530B /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +384,7 @@
 			packageProductDependencies = (
 				7DD027902AC1CF3400640F61 /* Kingfisher */,
 				7D335D7F2AC3527D00150C0D /* Alamofire */,
+				7D88F5BF2ADAFD7500232EED /* AlertMessage */,
 			);
 			productName = Liveable;
 			productReference = 7D1C0B442AC09A52000F134C /* Liveable.app */;
@@ -452,6 +461,7 @@
 			packageReferences = (
 				7DD0278F2AC1CF3400640F61 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7D335D7E2AC3527D00150C0D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				7D88F5BE2ADAFD7500232EED /* XCRemoteSwiftPackageReference "AlertMessage" */,
 			);
 			productRefGroup = 7D1C0B452AC09A52000F134C /* Products */;
 			projectDirPath = "";
@@ -542,7 +552,9 @@
 			files = (
 				7DC5DEFF2AC43AA2005DE7B6 /* ExploreViewModelTests.swift in Sources */,
 				7D1C0B592AC09A53000F134C /* LiveableTests.swift in Sources */,
+				7D88F5C32ADB07CE00232EED /* MockSearchService.swift in Sources */,
 				7DC5DEFD2AC437EE005DE7B6 /* MockExploreService.swift in Sources */,
+				7D88F5C52ADB097A00232EED /* SearchViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +881,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		7D88F5BE2ADAFD7500232EED /* XCRemoteSwiftPackageReference "AlertMessage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engingulek/AlertMessage.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		7DD0278F2AC1CF3400640F61 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -884,6 +904,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D335D7E2AC3527D00150C0D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		7D88F5BF2ADAFD7500232EED /* AlertMessage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D88F5BE2ADAFD7500232EED /* XCRemoteSwiftPackageReference "AlertMessage" */;
+			productName = AlertMessage;
 		};
 		7DD027902AC1CF3400640F61 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

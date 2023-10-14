@@ -33,7 +33,6 @@ struct SearchResultView: View {
                 }
             }
             Spacer()
-            
         }
             .onAppear{
                 viewModel.searchAdvert(searchText: searchText)

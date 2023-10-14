@@ -16,8 +16,7 @@ struct GuestItem  : Codable{
 }
 
 protocol SearchViewModelProtocol : ObservableObject {
-    var placeStatus : Bool {get}
-    var guestStatus : Bool {get}
+    var viewStatus : Bool {get}
     var searhAction : Bool {get}
     var isExitSearchList : Bool {get}
     var totalGuest : Int {get}
@@ -25,20 +24,19 @@ protocol SearchViewModelProtocol : ObservableObject {
     var isMapCountryListError : Bool {get}
     var isMapCountryListErrorMessage : String {get}
     var isToSearchResultView : Bool {get}
+    var isGuestEmptyError : Bool {get}
+    var isGuestEmptyErrorMessage : (String,String) {get}
       
     func selectedLocation(text:String)
-    func placeAction()
-    func guestAction()
+    func changeViewStatus()
     func addGuest(guestId id : Int)
     func  decreaseGuest(guestId id: Int)
     func decraseButtonDisabled(guestId id : Int) -> Bool
     func changeisMapCountryListLoded()
     func changeisMapCountryListError()
     func toSearchResultViewAction()
-    
-  
-  
-    
+    func onTapPlaceView()
+    func onTapGuestView()
     
 }
 
@@ -46,8 +44,7 @@ final class SearhViewModel :  SearchViewModelProtocol  {
     private let serviceManager : SearchServiceProtocol
     @Published var searchText : String = ""
     @Published var isExitSearchList : Bool = false
-    @Published var placeStatus : Bool = true
-    @Published var guestStatus : Bool = false
+    @Published var viewStatus : Bool = true
     @Published var guestList : [GuestItem] = []
     @Published var totalGuest : Int  = 0
     @Published var cityList : City = []
@@ -56,10 +53,16 @@ final class SearhViewModel :  SearchViewModelProtocol  {
     @Published var isMapCountryListError: Bool = false
     @Published var isMapCountryListErrorMessage: String = ""
     @Published var isToSearchResultView: Bool = false
+    @Published var isGuestEmptyError: Bool = false
+    @Published var isGuestEmptyErrorMessage: (String, String) = ("","")
    
     
     init(serviceManager : SearchServiceProtocol = SearchService.shared){
         self.serviceManager = serviceManager
+        self.didLoad()
+    }
+    
+    func didLoad(){
         self.getGuestList()
         self.fetchMapCountyList()
     }
@@ -128,23 +131,18 @@ extension SearhViewModel {
         DispatchQueue.main.async {
             self.isExitSearchList = true
             self.searchText = text
-            self.placeStatus = false
-            self.guestStatus = true
+            self.changeViewStatus()
             
         }
     }
     
-    func guestAction() {
-        self.placeStatus = false
-        self.guestStatus = true
+    func changeViewStatus() {
+        DispatchQueue.main.async {
+            self.viewStatus = !self.viewStatus
+        }
+        
     }
     
-    func placeAction() {
-        self.placeStatus = true
-        self.guestStatus = false
-    }
-    
-   
     
     func addGuest(guestId id: Int) {
         guestList[id].piece += 1
@@ -202,13 +200,21 @@ extension SearhViewModel {
     
     func changeisMapCountryListError() {
         self.isMapCountryListError = !self.isMapCountryListError
-        print(isMapCountryListError)
+    }
+    
+    func onTapPlaceView() {
+        self.changeViewStatus()
+    }
+    
+    func onTapGuestView() {
+        self.changeViewStatus()
     }
     
     func toSearchResultViewAction() {
         if totalGuest == 0 {
-            print("Total Guest Error")
-            // When I code my 3rd party framework the warning message will be added here
+            // for my 3rd party framework
+            self.isGuestEmptyError = true
+            self.isGuestEmptyErrorMessage = ("Error","Please Enter Guest")
         }else{
             self.isToSearchResultView  = true
         }
