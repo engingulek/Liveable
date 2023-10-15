@@ -1,9 +1,4 @@
-//
-//  AdvertDetailViewModel.swift
-//  Liveable
-//
-//  Created by engin gülek on 3.10.2023.
-//
+
 
 import Foundation
 import Alamofire
@@ -109,7 +104,8 @@ final class AdvertDetailViewModel : AdvertDetailViewModelProtocol {
 
 extension AdvertDetailViewModel {
     func changeIconSystemImage(id:Int) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             if self.savedList.contains(where: { $0.value.id == id }) {
                 self.iconSystemImage = "heart.fill"
             }else{

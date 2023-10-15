@@ -1,9 +1,4 @@
-//
-//  CategoryTitle.swift
-//  Liveable
-//
-//  Created by engin gülek on 26.09.2023.
-//
+
 
 import SwiftUI
 import Kingfisher
@@ -22,7 +17,6 @@ struct CategoryTitle: View {
         }
     }
 }
-
 
 extension CategoryTitle {
     private var category : some View {

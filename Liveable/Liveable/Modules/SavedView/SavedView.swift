@@ -1,9 +1,4 @@
-//
-//  Favorites.swift
-//  Liveable
-//
-//  Created by engin gülek on 24.09.2023.
-//
+
 
 import SwiftUI
 

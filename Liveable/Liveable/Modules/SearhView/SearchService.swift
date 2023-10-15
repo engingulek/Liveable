@@ -1,9 +1,4 @@
-//
-//  SearchService.swift
-//  Liveable
-//
-//  Created by engin gülek on 5.10.2023.
-//
+
 
 import Foundation
 
@@ -15,14 +10,12 @@ protocol SearchServiceProtocol {
 
 final class SearchService : SearchServiceProtocol {
     
-    let networkManager: NetworkManagerProtocol
+    private let networkManager: NetworkManagerProtocol
     static let shared = SearchService()
     
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
         self.networkManager = networkManager
     }
-    
-    
     
     func fetchCityList(completion: @escaping (Result<City, Error>) -> ()) {
         networkManager.fetch(target: .cityList, responseClass: City.self) { response in

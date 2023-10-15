@@ -1,17 +1,7 @@
-//
-//  ExploreService.swift
-//  Liveable
-//
-//  Created by engin gülek on 26.09.2023.
-//
+
 
 import Foundation
 import Alamofire
-
-
-
-
-
 
 protocol ExploreServiceProtocol{
     func fetchAdverts(completion:@escaping (Result<[Advert]?,Error>)  -> ())
@@ -22,7 +12,7 @@ protocol ExploreServiceProtocol{
 
 final class ExploreService : ExploreServiceProtocol {
 
-    let networkManager: NetworkManagerProtocol
+    private let networkManager: NetworkManagerProtocol
     static let shared = ExploreService()
     
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
@@ -54,8 +44,7 @@ final class ExploreService : ExploreServiceProtocol {
     }
     
     func fetchAdvertFilter(categoryId id : Int,completion:@escaping(Result<[Advert]?,Error>) -> ())  {
-   
-   
+        
         networkManager.fetch(target: .categoryFilter(id), responseClass: AdvertDic.self) { response in
             switch response {
             case .success(let list):

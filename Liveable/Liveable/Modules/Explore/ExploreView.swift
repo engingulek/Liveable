@@ -1,9 +1,4 @@
-//
-//  Explore.swift
-//  Liveable
-//
-//  Created by engin gülek on 24.09.2023.
-//
+
 
 import SwiftUI
 
@@ -19,8 +14,6 @@ struct ExploreView: View {
                     }.fullScreenCover(isPresented: $exploreViewModel.isToSearchView ) {
                         SearchView()
                     }
-                   
-                    
                     if exploreViewModel.isCategoryLoaded {
                         categories
                     }else{
@@ -54,7 +47,6 @@ struct ExploreView: View {
                         }else{
                            listAdvert
                         }
-                        
                     }
                 }else{
                   ProgressView()
@@ -102,9 +94,6 @@ extension ExploreView {
                                   viewModel:exploreViewModel
                     
                     )
-                   
-                   
-                   
                 }
             }
            

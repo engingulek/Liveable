@@ -1,9 +1,4 @@
-//
-//  SearchResultService.swift
-//  Liveable
-//
-//  Created by engin gülek on 5.10.2023.
-//
+
 
 import Foundation
 import Alamofire
@@ -11,14 +6,11 @@ protocol SearchResultServiceProtocol {
     func searchByCountry(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
     func searchByCity(text:String,completion:@escaping(Result<AdvertDic,Error>)->())
     
-  
 }
 
 final class SearchResultService :  SearchResultServiceProtocol {
-  
     
-    
-    let networkManager: NetworkManagerProtocol
+    private let networkManager: NetworkManagerProtocol
     static let shared =  SearchResultService()
     
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
@@ -47,9 +39,5 @@ final class SearchResultService :  SearchResultServiceProtocol {
             }
         }
     }
-    
-    
-  
-    
     
 }

@@ -1,9 +1,4 @@
-//
-//  AllReviewsService.swift
-//  Liveable
-//
-//  Created by engin gülek on 4.10.2023.
-//
+
 
 import Foundation
 import Alamofire

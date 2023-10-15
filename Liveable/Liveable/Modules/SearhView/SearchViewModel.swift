@@ -1,9 +1,3 @@
-//
-//  SearchViewModel.swift
-//  Liveable
-//
-//  Created by engin gülek on 28.09.2023.
-//
 
 import Foundation
 
@@ -128,16 +122,19 @@ final class SearhViewModel :  SearchViewModelProtocol  {
 
 extension SearhViewModel {
     func selectedLocation(text: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isExitSearchList = true
             self.searchText = text
             self.changeViewStatus()
-            
         }
+        
+       
     }
     
     func changeViewStatus() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.viewStatus = !self.viewStatus
         }
         
@@ -195,34 +192,57 @@ extension SearhViewModel {
     
     
     func changeisMapCountryListLoded() {
-        self.isMapCountryListLoded = !self.isMapCountryListLoded
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            self.isMapCountryListLoded = !self.isMapCountryListLoded
+        }
+        
     }
     
     func changeisMapCountryListError() {
-        self.isMapCountryListError = !self.isMapCountryListError
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            self.isMapCountryListError = !self.isMapCountryListError
+        }
+        
+        
     }
     
     func onTapPlaceView() {
-        self.changeViewStatus()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            self.changeViewStatus()
+        }
+        
     }
     
     func onTapGuestView() {
-        self.changeViewStatus()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            self.changeViewStatus()
+        }
+        
     }
     
     func toSearchResultViewAction() {
-        if totalGuest == 0 {
-            // for my 3rd party framework
-            self.isGuestEmptyError = true
-            self.isGuestEmptyErrorMessage = ("Error","Please Enter Guest")
-        }else{
-            self.isToSearchResultView  = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            if totalGuest == 0 {
+                // for my 3rd party framework
+                self.isGuestEmptyError = true
+                self.isGuestEmptyErrorMessage = ("Error","Please Enter Guest")
+            }else{
+                self.isToSearchResultView  = true
+            }
+            
         }
+       
     }
-    
-   
-
-
 }
 
 

@@ -1,9 +1,4 @@
-//
-//  AllReviewView.swift
-//  Liveable
-//
-//  Created by engin gülek on 4.10.2023.
-//
+
 
 import SwiftUI
 
@@ -16,12 +11,13 @@ struct AllReviewView: View {
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: false) {
-            ScrollViewReader { scrollView in // --> Here
+            ScrollViewReader { scrollView in
                 LazyVStack{
                     Text("\(viewModel.advertCommentDic.count) Reviews")
                         .font(.title2)
                         .fontWeight(.semibold)
                     
+                    // will show the selected comment
                     ForEach(viewModel.advertCommentDic.keys.sorted(by: <), id: \.self) { index in
                         AdvertComment(comment: viewModel.advertCommentDic[index])
                             .id(viewModel.advertCommentDic[index]?.id ?? 0)
@@ -29,7 +25,7 @@ struct AllReviewView: View {
                 }
                 .padding()
                 .onAppear {
-                    scrollView.scrollTo(selectedComment, anchor: .center) // ---> Here
+                    scrollView.scrollTo(selectedComment, anchor: .center)
                 }
             }
         }.onAppear{

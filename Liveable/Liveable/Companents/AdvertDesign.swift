@@ -1,9 +1,3 @@
-//
-//  AdvertDesign.swift
-//  Liveable
-//
-//  Created by engin gülek on 25.09.2023.
-//
 
 import SwiftUI
 struct AdvertDesign: View {
@@ -40,12 +34,8 @@ struct AdvertDesign: View {
                 Text(" night")
             }
         }.padding()
-      
-           
     }
 }
-
-
 
 struct AdvertDesign_Previews: PreviewProvider {
     static var previews: some View {
