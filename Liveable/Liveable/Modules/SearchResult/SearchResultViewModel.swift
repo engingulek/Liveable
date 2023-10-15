@@ -10,11 +10,8 @@ import Alamofire
 protocol SearchResultViewModelProtocol : ObservableObject {
     var isPageLoaded: Bool { get }
     var isEmptyData :  Bool {get}
-    
     func changeIsPageLoaded()
     func changeIsEmpty()
-    
-   
 }
 
 
@@ -22,7 +19,7 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
     
     @Published  var isPageLoaded: Bool = false
     @Published var isEmptyData: Bool = false
-    @Published  var isError: Bool = false
+    
     @Published var searchAdvertList : AdvertDic = [:]
     
     
@@ -47,7 +44,6 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
     }
     
     private func searchByCountry(text:String){
-        print("VM 1 \(text)")
         serviceManager.searchByCountry(text: text) { result in
             switch result {
             case .success(let dic):

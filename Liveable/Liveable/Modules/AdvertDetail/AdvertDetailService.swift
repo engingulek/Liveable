@@ -17,12 +17,8 @@ protocol AdvertDetailViewServiceProtocol {
     func fetchUserInfo(userId id :Int,completion:@escaping(Result<UserInfo,Error>)->())
     func fetchAllComment(advertId id : Int,completion:@escaping(Result<Comment?,Error>)->())
     func fetchSavedList(userId:String,completion:@escaping (Result<AdvertDic,Error>)->())
-    
     func addAdvertToSavedList(advert:Parameters,userId:String,completion: @escaping (Result<Welcome?, Error>) -> ())
     func deleteAdvertFromSavedList(userId:String,key:String,completion: @escaping (Result<Welcome?, Error>) -> ())
-    
-  
-    
 }
 
 
@@ -95,11 +91,4 @@ final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
             
         }
     }
-    
-    
-  
-    
-    
-    
-    
 }

@@ -12,7 +12,6 @@ import MapKit
 struct AdvertDetailView: View {
     let advert:Advert
     @State private var index = 0
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Environment(\.dismiss) var dismiss
     @StateObject private var  viewModel = AdvertDetailViewModel()
     var body: some View {
@@ -26,13 +25,6 @@ struct AdvertDetailView: View {
                         advertCityAndCountry
                         ownerInfo
                         advertDesc
-                        VStack {
-                            Map(coordinateRegion: $region)
-                                        .frame(height: 200)
-                                        .disabled(true)
-                                        .cornerRadius(20)
-                                        .padding(.horizontal)
-                        }
                         comment
                     }
                    
@@ -131,12 +123,7 @@ extension AdvertDetailView {
                 .fontWeight(.semibold)
             Spacer()
             
-            Image(systemName: "message")
-                .font(.title3)
-                .foregroundColor(.white)
-                .padding(10)
-                .background(.pink)
-                .clipShape(Circle())
+     
             
         }.padding(.horizontal)
     }
