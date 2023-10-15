@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct LiveableApp: App {
+   
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabbarRoot()
         }
     }
 }
