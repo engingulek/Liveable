@@ -237,12 +237,12 @@
 		7D1C0B7E2AC09F04000F134C /* Companents */ = {
 			isa = PBXGroup;
 			children = (
+				7D6FE6BD2ACF060600E47C93 /* ResultAdvert.swift */,
 				7DC57D692ACD84220052AE6E /* AdvertComment.swift */,
 				7D1C0B7F2AC09F18000F134C /* TabbarButton.swift */,
 				7DD0278D2AC1CE9500640F61 /* AdvertDesign.swift */,
 				7D8DE1092AC2F025009C4BFA /* CategoryTitle.swift */,
 				7D7951B82AC5AFD2008A1E6F /* PlaceTitle.swift */,
-				7D392B8A2ACAE46F00574AB8 /* Color+Extension.swift */,
 			);
 			path = Companents;
 			sourceTree = "<group>";
@@ -285,7 +285,6 @@
 				7D6FE6B32ACEEE3000E47C93 /* SearchResultView.swift */,
 				7D6FE6B72ACEFDC500E47C93 /* SearchResultViewModel.swift */,
 				7D6FE6B92ACEFE9500E47C93 /* SearchResultService.swift */,
-				7D6FE6BD2ACF060600E47C93 /* ResultAdvert.swift */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -302,6 +301,7 @@
 		7D957A452AD715FF008125FD /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				7D392B8A2ACAE46F00574AB8 /* Color+Extension.swift */,
 				7D957A432AD70E6F008125FD /* Codable+Extension.swift */,
 			);
 			path = Extension;

@@ -1,9 +1,3 @@
-//
-//  NetworkPath.swift
-//  Liveable
-//
-//  Created by engin gülek on 26.09.2023.
-//
 
 import Foundation
 import Alamofire
@@ -20,12 +14,9 @@ enum NetworkPath {
     case savedList(String)
     case addAdvertToSavedList(String,Parameters)
     case deleteAdvertFromSavedList(String,String)
-   
-
-    
     
     static let baseUrl:String = ProductConstants.BASE_URL
-    static let auth : String  = "zR45PQS3lkRWU7TEEJNosjYVadRJ1JSpxpnulT6z"
+  
 
 }
 

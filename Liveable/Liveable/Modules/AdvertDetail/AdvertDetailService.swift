@@ -1,14 +1,8 @@
-//
-//  AdvertDetailService.swift
-//  Liveable
-//
-//  Created by engin gülek on 3.10.2023.
-//
 
 import Foundation
 import Alamofire
 
-// MARK: - Welcome
+
 struct Welcome: Codable {
     let name: String
 }
@@ -24,7 +18,7 @@ protocol AdvertDetailViewServiceProtocol {
 
 final class AdvertDetailViewService : AdvertDetailViewServiceProtocol {
   
-    let networkManager: NetworkManagerProtocol
+    private let networkManager: NetworkManagerProtocol
     static let shared = AdvertDetailViewService()
     
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {

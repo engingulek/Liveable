@@ -1,9 +1,4 @@
-//
-//  SearchResultViewModel.swift
-//  Liveable
-//
-//  Created by engin gülek on 5.10.2023.
-//
+
 
 import Foundation
 import Alamofire
@@ -19,10 +14,7 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
     
     @Published  var isPageLoaded: Bool = false
     @Published var isEmptyData: Bool = false
-    
     @Published var searchAdvertList : AdvertDic = [:]
-    
-    
     
     private let serviceManager : SearchResultServiceProtocol
    
@@ -107,14 +99,16 @@ final class SearchResultViewModel : SearchResultViewModelProtocol  {
 
 extension SearchResultViewModel {
     func changeIsPageLoaded() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isPageLoaded = !self.isPageLoaded
         }
        
     }
     
     func changeIsEmpty() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isEmptyData = !self.isEmptyData
         }
         

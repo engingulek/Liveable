@@ -87,10 +87,6 @@ final class SavedViewModel : SavedViewModelProtocol {
             }
         }
     }
-    
-    
-    
-    
 }
 
 
@@ -98,33 +94,42 @@ extension SavedViewModel {
 
     
     func changeIsLoadingPage(isLoad:Bool) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isLoadingPage = isLoad
         }
     }
     
     func changeIsEmptyData() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isEmptyData = !self.isEmptyData
         }
     }
     
     func changeIsMessage(message: String, icon: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isMessage = (message:message,icon:icon)
         }
     }
     
     
     func changeIsError() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.isError = !self.isError
         }
     }
     
     
     func changeToDetailView() {
-        self.toDetailView = !self.toDetailView
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            
+            self.toDetailView = !self.toDetailView
+        }
+        
     }
     
     

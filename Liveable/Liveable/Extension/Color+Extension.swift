@@ -1,9 +1,3 @@
-//
-//  Color+Extension.swift
-//  Liveable
-//
-//  Created by engin gülek on 2.10.2023.
-//
 
 import SwiftUI
 

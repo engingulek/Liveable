@@ -1,9 +1,4 @@
-//
-//  PlaceTitle.swift
-//  Liveable
-//
-//  Created by engin gülek on 28.09.2023.
-//
+
 
 import SwiftUI
 import Kingfisher
@@ -21,7 +16,6 @@ struct PlaceTitle : View {
         } label: {
             place
         }
-
     }
 }
 

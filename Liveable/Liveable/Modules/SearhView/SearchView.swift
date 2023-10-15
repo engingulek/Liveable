@@ -1,9 +1,4 @@
-//
-//  SearchView.swift
-//  Liveable
-//
-//  Created by engin gülek on 28.09.2023.
-//
+
 
 import SwiftUI
 import AlertMessage

@@ -1,9 +1,4 @@
-//
-//  SavedService.swift
-//  Liveable
-//
-//  Created by engin gülek on 12.10.2023.
-//
+
 
 import Foundation
 
@@ -15,9 +10,7 @@ protocol SavedServiceProtocol {
 
 final class SavedService  :SavedServiceProtocol {
     
-    
-    
-    let networkManager: NetworkManagerProtocol
+   private let networkManager: NetworkManagerProtocol
     static let shared = SavedService()
     
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {

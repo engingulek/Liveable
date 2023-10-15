@@ -1,9 +1,3 @@
-//
-//  AdvertDetailView.swift
-//  Liveable
-//
-//  Created by engin gülek on 27.09.2023.
-//
 
 import SwiftUI
 import Kingfisher

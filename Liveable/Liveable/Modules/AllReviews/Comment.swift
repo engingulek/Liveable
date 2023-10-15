@@ -1,9 +1,3 @@
-//
-//  Comment.swift
-//  Liveable
-//
-//  Created by engin gülek on 4.10.2023.
-//
 
 import Foundation
 
@@ -20,6 +14,8 @@ struct CommnetValue: Codable {
         case advertOwnerID = "advertOwnerId"
         case commentText, commnetData, commneterUser, id
     }
+  
+    static let exampleCommentValue =  CommnetValue(advertOwnerID: 0, commentText: "", commnetData: "", commneterUser: CommneterUser.exampleCommneterUser, id: 0)
     
     static let comments = ["AdvertComment1", "AdvertComment2", "AdvertComment3", "AdvertComment4", "AdvertComment5", "AdvertComment6", "AdvertComment7", "AdvertComment8"]
 }
@@ -29,6 +25,8 @@ struct CommneterUser: Codable {
     let imageURL: String
     let nameSurname: String
 
+    static let exampleCommneterUser = CommneterUser(imageURL: "", nameSurname: "")
+    
     enum CodingKeys: String, CodingKey {
         case imageURL = "imageUrl"
         case nameSurname

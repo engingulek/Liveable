@@ -1,9 +1,3 @@
-//
-//  AdvertComment.swift
-//  Liveable
-//
-//  Created by engin gülek on 4.10.2023.
-//
 
 import SwiftUI
 
@@ -12,12 +6,9 @@ struct AdvertComment: View {
     let comment: CommnetValue?
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
-            
             Text(comment?.commentText ?? "")
                 .lineLimit(stateLineLimit ? 4 : 10)
                 .font(.callout)
-            
-            
             HStack {
                 Image(systemName: "person")
                     .foregroundColor(.white)
@@ -33,7 +24,6 @@ struct AdvertComment: View {
                         .foregroundColor(.gray)
                 }
                 Spacer()
-                
             }
             
         }.padding()
@@ -44,10 +34,8 @@ struct AdvertComment: View {
     }
 }
 
-
-//add will explation
-/*struct AdvertComment_Previews: PreviewProvider {
+struct AdvertComment_Previews: PreviewProvider {
     static var previews: some View {
-        AdvertComment()
+        AdvertComment(comment: CommnetValue.exampleCommentValue)
     }
-}*/
+}
